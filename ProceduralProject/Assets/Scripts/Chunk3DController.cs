@@ -10,10 +10,11 @@ public class Chunk3DController : MonoBehaviour
     [Tooltip("The size of a voxel, in meters.")]
     public float voxelSize = 1;
     public float threshold = 0.5f;
-    public float zoom = 10;
+    private float zoom;
 
     private void Start()
     {
+        zoom = Random.Range(0, 26);
         GenerateVoxels();
     }
 
@@ -36,6 +37,10 @@ public class Chunk3DController : MonoBehaviour
                     {
                         GameObject obj = Instantiate(voxelPrefab, pos, Quaternion.identity, transform);
                         obj.transform.localScale = Vector3.one * voxelSize;
+                        float voxelHeight = obj.transform.position.y;
+                        float halfHeight = dimensionSize / 2;
+                        if (voxelHeight > halfHeight) obj.GetComponent<Renderer>().material.color = Color.Lerp(Color.gray, Color.white, (voxelHeight - halfHeight) / halfHeight);
+                        else obj.GetComponent<Renderer>().material.color = Color.Lerp(Color.green, Color.gray, voxelHeight / halfHeight);
                     }
                 }
     }
