@@ -16,61 +16,44 @@ public class ChunkMeshController : MonoBehaviour
     private MeshFilter meshFilter;
 
     // Start is called before the first frame update
-    void Start()
+    void Start() => meshFilter = GetComponent<MeshFilter>();
+    private void OnValidate() => BuildMesh(new bool[resolution, resolution, resolution]);
+    void BuildMesh(bool[,,] voxels)
     {
-        meshFilter = GetComponent<MeshFilter>();
-
-    }
-    private void OnValidate()
-    {
-        BuildMesh();
-    }
-    void BuildMesh()
-    {
-        // sample our "noise field" to determine solidity?
-
-        bool[,,] voxels = new bool[resolution, resolution, resolution];
-
-        for (int x = 0; x < voxels.GetLength(0); x++) for (int y = 0; y < voxels.GetLength(1); y++) for (int z = 0; z < voxels.GetLength(2); z++)
-                {
-                    Vector3 pos = new Vector3(x, y, z);
-                    float density = Noise.Perlin(pos / zoom);
-                    voxels[x, y, z] = density > densityThreshold;
-                }
-
+        for (int x = 0; x < voxels.GetLength(0); x++) for (int y = 0; y < voxels.GetLength(1); y++) for (int z = 0; z < voxels.GetLength(2); z++) voxels[x, y, z] = Noise.Perlin(new Vector3(x, y, z) / zoom) > densityThreshold;
         //BuildMeshQuad();
         // Make storage for geometry.
-        List<Vector3> verts = new List<Vector3>();
-        List<int> tris = new List<int>();
-        List<Vector3> norms = new List<Vector3>();
-        List<Vector2> uvs = new List<Vector2>();
+        if (!meshFilter) meshFilter = GetComponent<MeshFilter>();
+        meshFilter.mesh = AddMesh(voxels, new List<Vector3>(), new List<int>(), new List<Vector3>(), new List<Vector2>());
+    }
 
+    private Mesh AddMesh(bool[,,] voxels, List<Vector3> verts, List<int> tris, List<Vector3> norms, List<Vector2> uvs)
+    {
         // generating the geometry:
-
-        for (int x = 0; x < voxels.GetLength(0); x++) for (int y = 0; y < voxels.GetLength(1); y++) for (int z = 0; z < voxels.GetLength(2); z++)
-                {
-                    if (voxels[x, y, z])
-                    {
-                        byte sides = 0;
-
-                        if (!Lookup(voxels, x, y + 1, z)) sides |= 01;
-                        if (!Lookup(voxels, x, y - 1, z)) sides |= 02;
-                        if (!Lookup(voxels, x + 1, y, z)) sides |= 04;
-                        if (!Lookup(voxels, x - 1, y, z)) sides |= 08;
-                        if (!Lookup(voxels, x, y, z + 1)) sides |= 16;
-                        if (!Lookup(voxels, x, y, z - 1)) sides |= 32;
-
-                        AddCube(new Vector3(x, y, z), sides, verts, tris, norms, uvs);
-                    }
-                }
+        for (int x = 0; x < voxels.GetLength(0); x++) for (int y = 0; y < voxels.GetLength(1); y++) for (int z = 0; z < voxels.GetLength(2); z++) if (voxels[x, y, z]) AddCubes(voxels, verts, tris, norms, uvs, x, y, z, 0);
         // Make mesh for geometry.
-        Mesh mesh = new Mesh();
+        return SetUpMesh(verts, tris, norms, uvs, new Mesh());
+    }
+
+    private Mesh SetUpMesh(List<Vector3> verts, List<int> tris, List<Vector3> norms, List<Vector2> uvs, Mesh mesh)
+    {
         mesh.vertices = verts.ToArray();
         mesh.triangles = tris.ToArray();
         mesh.normals = norms.ToArray();
         mesh.uv = uvs.ToArray();
-        if (!meshFilter) meshFilter = GetComponent<MeshFilter>();
-        meshFilter.mesh = mesh;
+        return mesh;
+    }
+
+    private void AddCubes(bool[,,] voxels, List<Vector3> verts, List<int> tris, List<Vector3> norms, List<Vector2> uvs, int x, int y, int z, byte sides)
+    {
+        if (!Lookup(voxels, x, y + 1, z)) sides |= 01;
+        if (!Lookup(voxels, x, y - 1, z)) sides |= 02;
+        if (!Lookup(voxels, x + 1, y, z)) sides |= 04;
+        if (!Lookup(voxels, x - 1, y, z)) sides |= 08;
+        if (!Lookup(voxels, x, y, z + 1)) sides |= 16;
+        if (!Lookup(voxels, x, y, z - 1)) sides |= 32;
+
+        AddCube(new Vector3(x, y, z), sides, verts, tris, norms, uvs);
     }
 
     bool Lookup(bool[,,] arr, int x, int y, int z)
@@ -81,44 +64,27 @@ public class ChunkMeshController : MonoBehaviour
         if (x >= arr.GetLength(0)) return false;
         if (y >= arr.GetLength(1)) return false;
         if (z >= arr.GetLength(2)) return false;
-        return arr[x,y,z];
+        return arr[x, y, z];
     }
 
     void AddCube(Vector3 position, byte sides, List<Vector3> verts, List<int> tris, List<Vector3> norms, List<Vector2> uvs)
     {
-        if ((sides & 01) > 0) AddQuad(position + new Vector3(0, +0.5f, 0), Quaternion.Euler(0, 0, 000), verts, tris, norms, uvs);
-        if ((sides & 02) > 0) AddQuad(position + new Vector3(0, -0.5f, 0), Quaternion.Euler(0, 0, 180), verts, tris, norms, uvs);
-        if ((sides & 04) > 0) AddQuad(position + new Vector3(+0.5f, 0, 0), Quaternion.Euler(0, 0, -90), verts, tris, norms, uvs);
-        if ((sides & 08) > 0) AddQuad(position + new Vector3(-0.5f, 0, 0), Quaternion.Euler(0, 0, +90), verts, tris, norms, uvs);
-        if ((sides & 16) > 0) AddQuad(position + new Vector3(0, 0, +0.5f), Quaternion.Euler(+90, 0, 0), verts, tris, norms, uvs);
-        if ((sides & 32) > 0) AddQuad(position + new Vector3(0, 0, -0.5f), Quaternion.Euler(-90, 0, 0), verts, tris, norms, uvs);
+
+        if ((sides & 01) > 0) AddQuad(position + new Vector3(0, +0.5f, 0), Quaternion.Euler(000, 0, 000), verts, tris, norms, uvs);
+        if ((sides & 02) > 0) AddQuad(position + new Vector3(0, -0.5f, 0), Quaternion.Euler(000, 0, 180), verts, tris, norms, uvs);
+        if ((sides & 04) > 0) AddQuad(position + new Vector3(+0.5f, 0, 0), Quaternion.Euler(000, 0, -90), verts, tris, norms, uvs);
+        if ((sides & 08) > 0) AddQuad(position + new Vector3(-0.5f, 0, 0), Quaternion.Euler(000, 0, +90), verts, tris, norms, uvs);
+        if ((sides & 16) > 0) AddQuad(position + new Vector3(0, 0, +0.5f), Quaternion.Euler(+90, 0, 000), verts, tris, norms, uvs);
+        if ((sides & 32) > 0) AddQuad(position + new Vector3(0, 0, -0.5f), Quaternion.Euler(-90, 0, 000), verts, tris, norms, uvs);
     }
 
     void AddQuad(Vector3 position, Quaternion rotation, List<Vector3> verts, List<int> tris, List<Vector3> norms, List<Vector2> uvs)
     {
-        int num = verts.Count;
-
-        verts.Add(position + rotation * new Vector3(0.5f, 0, 0.5f));
-        verts.Add(position + rotation * new Vector3(0.5f, 0, -0.5f));
-        verts.Add(position + rotation * new Vector3(-0.5f, 0, -0.5f));
-        verts.Add(position + rotation * new Vector3(-0.5f, 0, 0.5f));
-
-        tris.Add(num + 0);
-        tris.Add(num + 1);
-        tris.Add(num + 3);
-        tris.Add(num + 1);
-        tris.Add(num + 2);
-        tris.Add(num + 3);
-
-        norms.Add(rotation * new Vector3(0, 1, 0));
-        norms.Add(rotation * new Vector3(0, 1, 0));
-        norms.Add(rotation * new Vector3(0, 1, 0));
-        norms.Add(rotation * new Vector3(0, 1, 0));
-
-        uvs.Add(new Vector2(1, 0));
-        uvs.Add(new Vector2(1, 1));
-        uvs.Add(new Vector2(0, 0));
-        uvs.Add(new Vector2(0, 1));
+        float[] offsets = new[] { 0.5f, -0.5f };
+        foreach (float x in offsets) foreach (float z in offsets) verts.Add(position + rotation * new Vector3(x, 0, z));
+        foreach (int vertAdder in new[] { 0, 1, 3, 1, 2, 3 }) tris.Add(verts.Count + vertAdder);
+        for(int i = 0; i<4; i++)norms.Add(rotation * new Vector3(0, 1, 0));
+        foreach (int x in new[] { 1, 0 }) foreach (int y in new[] { 0, 1 }) uvs.Add(new Vector2(x, y));
     }
 
     void BuildMeshQuad()
