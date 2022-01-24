@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voxelPrefab: {fileID: 5947926909671541274, guid: bb6583626b7efbb499d6b5153e6f1b41, type: 3}
-  dimensionSize: 25
+  dimensionSize: 20
   voxelSize: 1
   threshold: 0.5
 --- !u!4 &1016494216
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 1150683201}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

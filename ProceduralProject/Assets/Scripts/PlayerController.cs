@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         cam = GetComponentInChildren<Camera>();
         pawn = GetComponent<CharacterController>();
     }
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Footwork(Physics.Raycast(transform.position - (transform.up * 0.5f), Vector3.down, 0.1f));
+        Footwork(Physics.Raycast(transform.position, -Vector3.up, 0.6f) || Physics.Raycast(transform.position, transform.forward, 0.6f));
         verticalVelocity += gravity * Time.deltaTime;
         pawn.Move(Vector3.up * verticalVelocity * Time.deltaTime);
 
@@ -41,8 +42,8 @@ public class PlayerController : MonoBehaviour
     /// <param name="lookInput">The input given by the player ordering the character change the character and camera rotation.</param>
     private void InterpretCameraInput(Vector2 lookInput)
     {
-        transform.Rotate(transform.up * lookInput.x * Time.deltaTime * 720f);
-        xRot -= lookInput.y * 360f * Time.deltaTime;
+        transform.Rotate(transform.up * lookInput.x * Time.deltaTime * 180);
+        xRot -= lookInput.y * 90 * Time.deltaTime;
     }
 
 }
