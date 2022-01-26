@@ -16,7 +16,7 @@ public class ChunkMeshController : MonoBehaviour
         public BlendMode blend;
         public bool on = true;
         public Vector3 offset;
-        [Range(5,50)]
+        [Range(5, 50)]
         public float zoom = 20;
         [Range(0, 1)]
         public float flattenAmount = 0;
@@ -38,7 +38,12 @@ public class ChunkMeshController : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start() => meshFilter = GetComponent<MeshFilter>();
+    void Start()
+    {
+        meshFilter = GetComponent<MeshFilter>();
+        meshCollider = GetComponent<MeshCollider>();
+    }
+
     private void OnValidate() => BuildMesh(new bool[resolution, resolution, resolution]);
     void BuildMesh(bool[,,] voxels)
     {
@@ -50,7 +55,7 @@ public class ChunkMeshController : MonoBehaviour
                 {
                     Vector3 pos = new Vector3(x, y, z);
                     float density = 0;
-                    foreach(NoiseField field in noiseFields)
+                    foreach (NoiseField field in noiseFields)
                     {
                         Vector3 noisePos = (pos + transform.position) / field.zoom + field.offset;
                         float d = Noise.Perlin(noisePos);
@@ -61,6 +66,7 @@ public class ChunkMeshController : MonoBehaviour
                                 density += d;
                                 break;
                             case BlendMode.Average:
+                                density = (density + d) / 2;
                                 break;
                             case BlendMode.Div:
                                 density /= d;
@@ -85,11 +91,12 @@ public class ChunkMeshController : MonoBehaviour
         }
 
         meshCollider = GetComponent<MeshCollider>();
-
-        meshFilter.mesh = AddMesh(voxels, new List<Vector3>(), new List<int>(), new List<Vector3>(), new List<Vector2>());
+        Mesh mesh = MakeMesh(voxels, new List<Vector3>(), new List<int>(), new List<Vector3>(), new List<Vector2>());
+        meshFilter.mesh = mesh;
+        meshCollider.sharedMesh = mesh;
     }
 
-    private Mesh AddMesh(bool[,,] voxels, List<Vector3> verts, List<int> tris, List<Vector3> norms, List<Vector2> uvs)
+    private Mesh MakeMesh(bool[,,] voxels, List<Vector3> verts, List<int> tris, List<Vector3> norms, List<Vector2> uvs)
     {
         // generating the geometry:
         for (int x = 0; x < voxels.GetLength(0); x++)
@@ -106,12 +113,13 @@ public class ChunkMeshController : MonoBehaviour
             }
         }
         // Make mesh for geometry.
-        return SetUpMesh(verts, tris, norms, uvs, new Mesh());
+        return SetUpMesh(verts, tris, norms, uvs);
+
     }
 
-    private Mesh SetUpMesh(List<Vector3> verts, List<int> tris, List<Vector3> norms, List<Vector2> uvs, Mesh mesh)
+    private Mesh SetUpMesh(List<Vector3> verts, List<int> tris, List<Vector3> norms, List<Vector2> uvs)
     {
-        //mesh
+        Mesh mesh = new Mesh();
         mesh.vertices = verts.ToArray();
         mesh.triangles = tris.ToArray();
         mesh.normals = norms.ToArray();
@@ -225,18 +233,14 @@ public class ChunkMeshController : MonoBehaviour
 
     void AddQuad(Vector3 position, Quaternion rotation, List<Vector3> verts, List<int> tris, List<Vector3> norms, List<Vector2> uvs)
     {
-        float[] offsets = new[] { 0.5f, -0.5f };
-        foreach (float x in offsets)
-        {
-            foreach (float z in offsets)
-            {
-                verts.Add(position + (rotation * new Vector3(x, 0, z)));
-            }
-        }
+        verts.Add(position + rotation * new Vector3(+0.5f, 0, +0.5f));
+        verts.Add(position + rotation * new Vector3(+0.5f, 0, -0.5f));
+        verts.Add(position + rotation * new Vector3(-0.5f, 0, -0.5f));
+        verts.Add(position + rotation * new Vector3(-0.5f, 0, +0.5f));
 
         foreach (int vertAdder in new[] { 0, 1, 3, 1, 2, 3 })
         {
-            tris.Add(verts.Count + vertAdder);
+            tris.Add(verts.Count + vertAdder - 4);
         }
 
         for (int i = 0; i < 4; i++)
@@ -244,13 +248,10 @@ public class ChunkMeshController : MonoBehaviour
             norms.Add(rotation * new Vector3(0, 1, 0));
         }
 
-        foreach (int x in new[] { 1, 0 })
-        {
-            foreach (int y in new[] { 0, 1 })
-            {
-                uvs.Add(new Vector2(x, y));
-            }
-        }
+        uvs.Add(new Vector2(1, 0));
+        uvs.Add(new Vector2(1, 1));
+        uvs.Add(new Vector2(0, 1));
+        uvs.Add(new Vector2(0, 0));
     }
 
     void BuildMeshQuad()
