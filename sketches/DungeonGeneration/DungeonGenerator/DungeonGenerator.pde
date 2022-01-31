@@ -5,4 +5,9 @@ void setup(){
 }
 void draw(){
   background(0);
+  d.draw();
+}
+
+void mousePressed(){
+  d.generate();
 }
