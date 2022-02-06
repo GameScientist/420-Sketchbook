@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Footwork(Physics.Raycast(transform.position, -Vector3.up, 0.6f) || Physics.Raycast(transform.position, transform.forward, 0.6f));
+        Footwork();
         verticalVelocity += gravity * Time.deltaTime;
         pawn.Move(Vector3.up * verticalVelocity * Time.deltaTime);
 
@@ -29,11 +29,12 @@ public class PlayerController : MonoBehaviour
         cam.transform.localRotation = Quaternion.Euler(Mathf.Clamp(xRot, -45f, 45f), 0, 0);
     }
 
-    private void Footwork(bool grounded)
+    private void Footwork()
     {
+        bool grounded = Physics.Raycast(transform.position - transform.up, -Vector3.up, 0.1f) || Physics.Raycast(transform.forward * 0.5f + transform.position, transform.forward, 0.6f);
         if (grounded) verticalVelocity = -1f;
         pawn.Move(((transform.right * Input.GetAxis("Horizontal")) + (transform.forward * Input.GetAxis("Vertical"))) * 10f * Time.deltaTime);
-        if (grounded && Input.GetButton("Jump")) verticalVelocity = -Mathf.Sqrt(1) * gravity;
+        if (grounded && Input.GetButton("Jump")) verticalVelocity = Mathf.Sqrt(40);
     }
 
     /// <summary>

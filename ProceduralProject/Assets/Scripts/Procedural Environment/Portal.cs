@@ -5,8 +5,5 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    private void OnTriggerEnter(Collider other) => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 }
