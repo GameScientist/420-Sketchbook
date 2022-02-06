@@ -28,10 +28,13 @@ public class Room : MonoBehaviour
 
         Quaternion rotN = Quaternion.Euler(-90, (Random.Range(0, 100) < 50) ? 0 : 180, 0);
         Quaternion rotS = Quaternion.Euler(-90, (Random.Range(0, 100) < 50) ? 0 : 180, 0);
-        Quaternion rotE = Quaternion.Euler(-90, (Random.Range(0, 100) < 50) ? 0 : 180, 0);
-        Quaternion rotW = Quaternion.Euler(-90, (Random.Range(0, 100) < 50) ? 0 : 180, 0);
+        Quaternion rotE = Quaternion.Euler(-90, (Random.Range(0, 100) < 50) ? -90 : 90, 0);
+        Quaternion rotW = Quaternion.Euler(-90, (Random.Range(0, 100) < 50) ? -90 : 90, 0);
 
         // spawn walls
         Instantiate(prefabN, posN, rotN, transform);
+        Instantiate(prefabS, posS, rotS, transform);
+        Instantiate(prefabE, posE, rotE, transform);
+        Instantiate(prefabW, posW, rotW, transform);
     }
 }

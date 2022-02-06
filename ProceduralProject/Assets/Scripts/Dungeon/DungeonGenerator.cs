@@ -27,7 +27,6 @@ public class DungeonGenerator : MonoBehaviour
                 if (rooms[x, z] == 0) continue;
                 Vector3 pos = new Vector3(x, 0, z) * spaceBetweenRooms;
                 Room newRoom = Instantiate(prefabRoom, pos, Quaternion.identity);
-
                 newRoom.InitRoom((RoomType)rooms[x, z]);
             }
         }

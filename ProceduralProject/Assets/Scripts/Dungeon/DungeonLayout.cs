@@ -23,8 +23,7 @@ public class DungeonLayout
 
     public void Generate(int size)
     {
-        res = size;
-        res = res * lilsPerBig;
+        res = size * lilsPerBig;
 
         bigRooms = new int[res, res];
         lilRooms = new int[hiRes, hiRes];
@@ -34,11 +33,6 @@ public class DungeonLayout
         WalkRooms(RoomType.FloorEnter, RoomType.FloorExit);
 
         MakeBigRooms();
-
-        // walk()
-        // walk()
-        // walk()
-        // makeBigRooms()
     }
 
     private void WalkRooms(RoomType a, RoomType b)
