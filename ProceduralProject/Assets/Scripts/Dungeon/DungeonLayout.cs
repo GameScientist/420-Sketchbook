@@ -1,70 +1,94 @@
 using UnityEngine;
 
+/// <summary>
+/// Define all types of rooms 
+/// </summary>
 public enum RoomType
 {
-    Void,       // 0
-    Normal,     // 1
-    RandomPOI,  // 2
-    Merchant,   // 3
-    Shrine,     // 4
+    Void, // 0
+    Normal, // 1
+    RandomPOI, // 2
+    Merchant, // 3
+    Shrine, // 4
     QuestGiver, // 5
-    Loot,       // 6
-    FloorEnter, // 7
-    FloorExit   // 8
+    Loot, // 6
+    FloorEnter, // 7 
+    FloorExit // 8
 }
+
 
 public class DungeonLayout
 {
-    int lilsPerBig = 5;
-    int res = 0;
-    int hiRes = 0;
-    int[,] lilRooms;
-    int[,] bigRooms;
+    private int smallPerLarge = 5;
+    private int resolution = 0;
+    private int hires = 0;
+
+    private int[,] smallRooms;
+    private int[,] bigRooms;
 
     public void Generate(int size)
     {
-        res = size * lilsPerBig;
+        resolution = size;
+        hires = resolution * smallPerLarge;
 
-        bigRooms = new int[res, res];
-        lilRooms = new int[hiRes, hiRes];
+        bigRooms = new int[resolution, resolution];
+        smallRooms = new int[hires, hires];
 
+        // Walk through rooms multiple times, defined by type of room
         WalkRooms(RoomType.FloorEnter, RoomType.FloorExit);
         WalkRooms(RoomType.RandomPOI, RoomType.RandomPOI);
-        WalkRooms(RoomType.FloorEnter, RoomType.FloorExit);
+        WalkRooms(RoomType.RandomPOI, RoomType.RandomPOI);
+        WalkRooms(RoomType.RandomPOI, RoomType.RandomPOI);
 
+        // Make big rooms
         MakeBigRooms();
+
+        // Punch holes
     }
 
     private void WalkRooms(RoomType a, RoomType b)
     {
-        // starting room:
-        int x = Random.Range(0, hiRes);
-        int y = Random.Range(0, hiRes);
+        // Starting room
+        int x = Random.Range(0, hires);
+        int y = Random.Range(0, hires);
 
-        int half = hiRes / 2;
+        int half = hires / 2;
 
-        //end rooms:
-        int tx = Random.Range(0, half);
-        int ty = Random.Range(0, half);
+        // end rooms
+        int endX = Random.Range(0, half);
+        int endY = Random.Range(0, half);
 
-        if (x < half) tx += half;
-        if (y < half) ty += half;
+        if (x < half) endX += half;
+        if (y < half) endY += half;
 
-        // insert two rooms into dungeon:
-        SetLilRoom(x, y, (int)a);
-        SetLilRoom(tx, ty, (int)b);
+        // Insert two rooms into dungeon
+        SetSmallRoom(x, y, (int)a);
+        SetSmallRoom(endX, endY, (int)b);
 
-        int totalRooms = 0;
 
-        // walk to target room:
-        while (x != tx || y != ty)
+        // Walk until we reach the target room
+        while (x != endX || y != endY)
         {
-            if (totalRooms++ > 256) break;
+            int dir = Random.Range(0, 4); // 0 to 3
+            int dis = Random.Range(2, 6); // 2 to 5
 
-            int dir = Random.Range(0, 4);
-            int dis = Random.Range(2, 6);
+            int disX = endX - x;
+            int disY = endY - y;
 
-            // step into next room:
+            // Make the position moved less random, or not random at all
+            if (Random.Range(0, 100) < 50)
+            {
+                // Pick the direction which gets closer to the target
+                if (Mathf.Abs(disX) > Mathf.Abs(disY))
+                {
+                    dir = (disX > 0) ? 3 : 2;
+                }
+                else
+                {
+                    dir = (disY > 0) ? 1 : 0;
+                }
+            }
+
             for (int i = 0; i < dis; i++)
             {
                 if (dir == 0) y--;
@@ -72,29 +96,37 @@ public class DungeonLayout
                 if (dir == 2) x--;
                 if (dir == 3) x++;
 
-                x = Mathf.Clamp(x, 0, hiRes - 1);
-                y = Mathf.Clamp(y, 0, hiRes - 1);
+                x = Mathf.Clamp(x, 0, hires - 1);
+                y = Mathf.Clamp(y, 0, hires - 1);
 
-                if (GetLilRoom(x, y) == 0)
+                if (GetSmallRoom(x, y) == 0)
                 {
-                    SetLilRoom(x, y, 1);
+                    SetSmallRoom(x, y, 1);
                 }
-                SetLilRoom(x, y, 1);
+            } // for
 
-            }// ends for
-        } // ends while
-    }//ends
+
+        } // while
+    } // function
 
     private void MakeBigRooms()
     {
-        for (int x = 0; x < lilRooms.GetLength(0); x++)
+        // Loop through each dimension of the array
+        for (int x = 0; x < smallRooms.GetLength(0); x++)
         {
-            for (int y = 0; y < lilRooms.GetLength(0); y++)
+            for (int y = 0; y < smallRooms.GetLength(1); y++)
             {
-                int val = GetLilRoom(x, y);
+                int val = GetSmallRoom(x, y);
 
-                int xb = x / lilsPerBig;
-                int yb = y / lilsPerBig;
+                int xb = x / smallPerLarge;
+                int yb = y / smallPerLarge;
+
+                // If the value of big room is larger than that of little room
+                if (GetBigRoom(xb, yb) < val)
+                {
+                    // Set them both equal
+                    SetBigRoom(xb, yb, val);
+                }
             }
         }
     }
@@ -103,60 +135,59 @@ public class DungeonLayout
     {
         if (bigRooms == null)
         {
-            Debug.LogError("DungeonLayout: Must call Generate() before calling GetRooms()");
+            Debug.LogError("GenerateData: Can't get rooms before calling Generate();");
             return new int[0, 0];
         }
 
-        // make an empty array, same size:
+        // Make a copy of the bigRooms array:
         int[,] copy = new int[bigRooms.GetLength(0), bigRooms.GetLength(1)];
-
-        // copy data to new array
         System.Array.Copy(bigRooms, 0, copy, 0, bigRooms.Length);
 
-        // return the copy
-        return bigRooms;
+        // Return the copy of the bigRooms array
+        return copy;
     }
 
-    private int GetLilRoom(int x, int y)
+    private int GetSmallRoom(int x, int y)
     {
-        if (lilRooms == null) return 0;
+        // Check to see if the room chosen is in the bounds of the array
+        if (smallRooms == null) return 0;
         if (x < 0) return 0;
         if (y < 0) return 0;
-        if (x >= lilRooms.GetLength(0)) return 0;
-        if (y >= lilRooms.GetLength(0)) return 0;
+        if (x >= smallRooms.GetLength(0)) return 0;
+        if (y >= smallRooms.GetLength(1)) return 0;
 
-        return lilRooms[x, y];
+        return smallRooms[x, y];
     }
-
-    private void SetLilRoom(int x, int y, int val)
+    private void SetSmallRoom(int x, int y, int val)
     {
-        if (lilRooms == null) return;
+        // Check to see if the room chosen is in the bounds of the array
+        if (smallRooms == null) return;
         if (x < 0) return;
         if (y < 0) return;
-        if (x >= lilRooms.GetLength(0)) return;
-        if (y >= lilRooms.GetLength(0)) return;
+        if (x >= smallRooms.GetLength(0)) return;
+        if (y >= smallRooms.GetLength(1)) return;
 
-        lilRooms[x, y] = val;
+        smallRooms[x, y] = val;
     }
-
     private int GetBigRoom(int x, int y)
     {
+        // Check to see if the room chosen is in the bounds of the array
         if (bigRooms == null) return 0;
         if (x < 0) return 0;
         if (y < 0) return 0;
         if (x >= bigRooms.GetLength(0)) return 0;
-        if (y >= bigRooms.GetLength(0)) return 0;
+        if (y >= bigRooms.GetLength(1)) return 0;
 
-        return lilRooms[x, y];
+        return bigRooms[x, y];
     }
-
     private void SetBigRoom(int x, int y, int val)
     {
+        // Check to see if the room chosen is in the bounds of the array
         if (bigRooms == null) return;
         if (x < 0) return;
         if (y < 0) return;
         if (x >= bigRooms.GetLength(0)) return;
-        if (y >= bigRooms.GetLength(0)) return;
+        if (y >= bigRooms.GetLength(1)) return;
 
         bigRooms[x, y] = val;
     }

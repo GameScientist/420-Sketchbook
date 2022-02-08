@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Chunk3DController : MonoBehaviour
 {
-    public GameObject voxelPrefab;
+    public GameObject lavaPrefab, portalPrefab, spawnPrefab, voxelPrefab;
     [Tooltip("How many voxels per dimension.")]
     public int dimensionSize = 10;
     [Tooltip("The size of a voxel, in meters.")]
