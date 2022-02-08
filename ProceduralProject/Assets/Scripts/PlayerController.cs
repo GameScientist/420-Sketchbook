@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private void Footwork()
     {
-        bool grounded = Physics.Raycast(transform.position - transform.up, -Vector3.up, 0.1f) || Physics.Raycast(transform.forward * 0.5f + transform.position, transform.forward, 0.6f);
+        bool grounded = Physics.Raycast(transform.position - transform.up, -Vector3.up, 0.1f);// || Physics.Raycast(transform.forward * 0.5f + transform.position, transform.forward, 0.6f);
         if (grounded) verticalVelocity = -1f;
         pawn.Move(((transform.right * Input.GetAxis("Horizontal")) + (transform.forward * Input.GetAxis("Vertical"))) * 10f * Time.deltaTime);
         if (grounded && Input.GetButton("Jump")) verticalVelocity = Mathf.Sqrt(40);
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="lookInput">The input given by the player ordering the character change the character and camera rotation.</param>
     private void InterpretCameraInput(Vector2 lookInput)
     {
+        print(lookInput);
         transform.Rotate(transform.up * lookInput.x * Time.deltaTime * 180);
         xRot -= lookInput.y * 90 * Time.deltaTime;
     }

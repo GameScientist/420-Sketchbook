@@ -30,7 +30,7 @@ public class Berry : MonoBehaviour
 
         // 2. spawn the instances
 
-        Grow(instances, Vector3.zero, Quaternion.identity, new Vector3(.25f, .25f, .25f), iterations);
+        Grow(instances, Vector3.zero, Quaternion.identity, new Vector3(.1f, .2f, .1f), iterations);
 
         // 3. combining the instances together
         Mesh mesh = new Mesh();

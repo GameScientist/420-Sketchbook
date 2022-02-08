@@ -57,6 +57,7 @@ public class ChunkMeshController : MonoBehaviour
                     float density = 0;
                     foreach (NoiseField field in noiseFields)
                     {
+                        field.offset = new Vector3(Random.Range(0, 1), Random.Range(0, 1), Random.Range(0, 1));
                         Vector3 noisePos = (pos + transform.position) / field.zoom + field.offset;
                         float d = Noise.Perlin(noisePos);
                         d -= ((y + field.flattenOffset) / 100f) * field.flattenAmount;
