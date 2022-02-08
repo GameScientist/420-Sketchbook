@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
-public class PlantDemo : MonoBehaviour
+public class Berry : MonoBehaviour
 {
     [Range(2, 30)]
     public int iterations = 5;
@@ -30,7 +30,7 @@ public class PlantDemo : MonoBehaviour
 
         // 2. spawn the instances
 
-        Grow(instances, Vector3.zero, Quaternion.identity, new Vector3(.25f, 1, .25f), iterations);
+        Grow(instances, Vector3.zero, Quaternion.identity, new Vector3(.25f, .25f, .25f), iterations);
 
         // 3. combining the instances together
         Mesh mesh = new Mesh();

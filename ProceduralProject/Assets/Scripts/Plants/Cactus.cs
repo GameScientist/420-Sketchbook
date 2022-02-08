@@ -12,15 +12,23 @@ public class Cactus : MonoBehaviour
     [Range(5, 45)]
     public int spreadDegress = 10;
 
-    public GameObject player;
+    public Transform player;
 
     static private Quaternion playerDirection;
+
+    private bool grown;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         playerDirection = Quaternion.LookRotation(player.transform.position) * Quaternion.Euler(90, 0, 0);
         Build();
+    }
+
+    private void Update()
+    {
+        if (Vector3.Distance(transform.position, player.transform.position) < 10 && !grown) StartCoroutine(Grow(new List<CombineInstance>(), Vector3.zero, playerDirection, new Vector3(.25f, 1, .25f), iterations));
     }
 
     void Build()
