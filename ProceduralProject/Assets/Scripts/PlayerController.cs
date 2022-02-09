@@ -21,31 +21,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Footwork();
+        pawn.Move(((transform.right * Input.GetAxis("Horizontal")) + (transform.forward * Input.GetAxis("Vertical"))) * 10f * Time.deltaTime);
+        if (pawn.isGrounded)
+        {
+            verticalVelocity = -1f;
+            if (Input.GetButton("Jump")) verticalVelocity = Mathf.Sqrt(80);
+        }
         verticalVelocity += gravity * Time.deltaTime;
         pawn.Move(Vector3.up * verticalVelocity * Time.deltaTime);
 
-        InterpretCameraInput(new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")).normalized);
+        transform.Rotate(0, Input.GetAxis("Mouse X"), 0);
+        xRot -= Input.GetAxis("Mouse Y");
         cam.transform.localRotation = Quaternion.Euler(Mathf.Clamp(xRot, -45f, 45f), 0, 0);
     }
-
-    private void Footwork()
-    {
-        bool grounded = Physics.Raycast(transform.position - transform.up, -Vector3.up, 0.1f);// || Physics.Raycast(transform.forward * 0.5f + transform.position, transform.forward, 0.6f);
-        if (grounded) verticalVelocity = -1f;
-        pawn.Move(((transform.right * Input.GetAxis("Horizontal")) + (transform.forward * Input.GetAxis("Vertical"))) * 10f * Time.deltaTime);
-        if (grounded && Input.GetButton("Jump")) verticalVelocity = Mathf.Sqrt(40);
-    }
-
-    /// <summary>
-    /// Rotates the player and camera based on collected input.
-    /// </summary>
-    /// <param name="lookInput">The input given by the player ordering the character change the character and camera rotation.</param>
-    private void InterpretCameraInput(Vector2 lookInput)
-    {
-        print(lookInput);
-        transform.Rotate(transform.up * lookInput.x * Time.deltaTime * 180);
-        xRot -= lookInput.y * 90 * Time.deltaTime;
-    }
-
 }
