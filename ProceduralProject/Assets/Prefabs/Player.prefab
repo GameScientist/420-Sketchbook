@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3aeedce42847ff4e80bf6a1c32e50b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  berryGoal: 0
 --- !u!143 &1780649438195980598
 CharacterController:
   m_ObjectHideFlags: 0
@@ -144,7 +145,7 @@ CharacterController:
   m_Height: 4
   m_Radius: 1
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}

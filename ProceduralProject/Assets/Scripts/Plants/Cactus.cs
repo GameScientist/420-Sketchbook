@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(MeshCollider))]
 public class Cactus : MonoBehaviour
 {
     [Range(0, 100000000)]
@@ -25,23 +26,12 @@ public class Cactus : MonoBehaviour
 
     private System.Random randGenerator;
 
-    private Transform player;
     private bool grown;
-
-    private float Rand(float min, float max)
-    {
-        return (float)randGenerator.NextDouble() * (max - min) + min;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        randGenerator = new System.Random(seed);
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
+    public Transform player;
 
     private void Update()
     {
+        if (player == null) return;
         if (Vector3.Distance(transform.position, player.transform.position) < 7.5f && !grown)
         {
             grown = true;
@@ -57,7 +47,7 @@ public class Cactus : MonoBehaviour
         // add to num calc percent
         float percentAtEnd = ++num / (float)max;
 
-        yield return new WaitForSeconds(Mathf.Lerp(0.017f, 0.25f, percentAtEnd)+Random.Range(-0.15f, 0.15f));
+        yield return new WaitForSeconds(Mathf.Lerp(0.017f, 0.25f, percentAtEnd) + Random.Range(-0.15f, 0.15f));
 
         // make a vube mess, add to list
 
@@ -82,6 +72,7 @@ public class Cactus : MonoBehaviour
 
         MeshFilter meshFilter = GetComponent<MeshFilter>();
         if (meshFilter) meshFilter.mesh = instances.MakeMultiMesh();
+        GetComponent<MeshCollider>().sharedMesh = mesh;
 
         StartCoroutine(Grow(
             instances,
@@ -136,4 +127,8 @@ public class Cactus : MonoBehaviour
 
     Quaternion PlayerDirection() => Quaternion.LookRotation(player.transform.position - transform.position, Vector3.up) * Quaternion.Euler(90, 0, 0);
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) other.GetComponent<PlayerController>().GameOver(false);
+    }
 }

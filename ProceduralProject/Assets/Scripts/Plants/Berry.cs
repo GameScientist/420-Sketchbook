@@ -74,4 +74,11 @@ public class Berry : MonoBehaviour
                 Grow(instances, endPoint, newRot, scale * .9f, max, num + 1);
             }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+        other.GetComponent<PlayerController>().EatBerries();
+        Destroy(gameObject);
+    }
 }
