@@ -6,62 +6,142 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class Cactus : MonoBehaviour
 {
-    [Range(2, 20)]
-    public int iterations = 5;
+    [Range(0, 100000000)]
+    private int seed = 0;
 
-    [Range(5, 45)]
-    public int spreadDegress = 10;
+    [Range(5, 30)]
+    public int iterations = 5, turnDegrees = 10;
 
-    public Transform player;
+    [Range(-45, 45)]
+    public int twistDegrees = 10;
 
-    static private Quaternion playerDirection;
+    [Range(0, 1)]
+    public float alignWithParent;
 
+    [Range(1, 10)]
+    public int branchNodeDistance = 2, branchNodeTrunk = 1;
+
+    public BranchingType branchingType;
+
+    private System.Random randGenerator;
+
+    private Transform player;
+    private Quaternion playerDirection;
     private bool grown;
+
+    private float Rand()
+    {
+        return (float)randGenerator.NextDouble();
+    }
+    private float Rand(float min, float max)
+    {
+        return Rand() * (max - min) + min;
+    }
+    private float RandBell(float min, float max)
+    {
+        // 6, 6
+        // 2/12: (1/36)
+        // 7: (1/6)
+        // 2 to 12
+        // 1 to 6
+        min /= 2;
+        return Rand(min, max) + Rand(min, max);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        randGenerator = new System.Random(seed);
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerDirection = Quaternion.LookRotation(player.transform.position) * Quaternion.Euler(90, 0, 0);
-        Build();
     }
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < 10 && !grown) StartCoroutine(Grow(new List<CombineInstance>(), Vector3.zero, playerDirection, new Vector3(.25f, 1, .25f), iterations));
+        if (Vector3.Distance(transform.position, player.transform.position) < 10 && !grown)
+        {
+            grown = true;
+            StartCoroutine(Grow(new InstanceCollection(), Vector3.zero, playerDirection, new Vector3(.25f, 2, .25f), iterations));
+        }
     }
 
-    void Build()
-    {
-        StartCoroutine(Grow(new List<CombineInstance>(), Vector3.zero, playerDirection, new Vector3(.25f, 1, .25f), iterations));
-    }
-
-    IEnumerator Grow(List<CombineInstance> instances, Vector3 pos, Quaternion rot, Vector3 scale, int max, int num = 0)
+    IEnumerator Grow(InstanceCollection instances, Vector3 pos, Quaternion rot, Vector3 scale, int max, int num = 0, float nodeSpin = 0)
     {
         if (num < 0) num = 0;
         if (num >= max) yield break; // stop recursion
 
-        yield return new WaitForSeconds(0.02f);
+        yield return new WaitForSeconds(0.25f);
 
         // make a vube mess, add to list
 
-        CombineInstance inst = new CombineInstance();
-        inst.mesh = MeshTools.MakeCube();
-        inst.transform = Matrix4x4.TRS(pos, rot, scale);
-        instances.Add(inst);
+        Matrix4x4 xform = Matrix4x4.TRS(pos, rot, scale);
+        instances.AddBranch(MeshTools.MakeCube(), xform);
 
-        Vector3 endPoint = inst.transform.MultiplyPoint(new Vector3(0, 1, 0));
-
-        Mesh mesh = new Mesh();
-        mesh.CombineMeshes(instances.ToArray());
-
-        MeshFilter meshFilter = GetComponent<MeshFilter>();
-        if (meshFilter) meshFilter.mesh = mesh;
+        // add to num calc percent
+        float percentAtEnd = ++num / (float)max;
+        Vector3 endPoint = xform.MultiplyPoint(new Vector3(0, 1, 0));
 
         if ((pos - endPoint).magnitude < .1f) yield break; // too small, stop recursion!
 
-        StartCoroutine(Grow(instances, endPoint, Quaternion.Lerp(Quaternion.RotateTowards(rot, playerDirection, 45), rot * Quaternion.Euler(spreadDegress, Random.Range(-90f, 90f), 0), ++num / (float)max), scale * .9f, max, num + 1));
+        bool hasNode = (num >= branchNodeTrunk && (num - branchNodeTrunk - 1) % branchNodeDistance == 0);
 
-        if (num > 1) if (num % 2 == 1) StartCoroutine(Grow(instances, endPoint, playerDirection * Quaternion.Euler(0, Random.Range(-1, 2) * 90, 0), scale * .9f, max, num + 1));
+        if (hasNode)
+        {
+            if (branchingType == BranchingType.Alternate180) nodeSpin += 180f;
+            if (branchingType == BranchingType.Alternate1375) nodeSpin += 137.5f;
+        }
+
+        {
+            Quaternion randRod = rot * Quaternion.Euler(turnDegrees, twistDegrees, 0);
+            Quaternion upRot = Quaternion.RotateTowards(rot, Quaternion.identity, 45);
+
+
+            Quaternion newRot = Quaternion.Lerp(randRod, upRot, percentAtEnd);
+
+            StartCoroutine(Grow(instances, endPoint, newRot, scale * .9f, max, num, nodeSpin));
+        }
+
+        if (hasNode)
+        {
+            int howMany = 0;
+            float degreesBetweenNodes = 0;
+            switch (branchingType)
+            {
+                case BranchingType.Random:
+                    howMany = 1;
+                    break;
+                case BranchingType.Opposite:
+                    howMany = 2;
+                    degreesBetweenNodes = 180;
+                    break;
+                case BranchingType.Alternate180:
+                    howMany = 1;
+
+                    break;
+                case BranchingType.Alternate1375:
+                    howMany = 1;
+
+                    break;
+                case BranchingType.WhorledTwo:
+                    howMany = 2;
+                    degreesBetweenNodes = 180;
+                    break;
+                case BranchingType.WhorledThree:
+                    howMany = 3;
+                    degreesBetweenNodes = 120;
+                    break;
+            }
+
+            float lean = Mathf.Lerp(90, 0, alignWithParent);
+            for (int i = 0; i < howMany; i++)
+            {
+                float spin = nodeSpin + degreesBetweenNodes + 1;
+                Quaternion newRot = rot * Quaternion.Euler(lean, spin, 0);
+
+                float s = RandBell(.5f, .95f);
+
+                StartCoroutine(Grow(instances, endPoint, newRot, scale * s, max, num, 90));
+            }
+        }
     }
 }

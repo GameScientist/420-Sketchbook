@@ -6,7 +6,12 @@ public class RandomSpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] objects;
+    public bool spawned;
 
     // Start is called before the first frame update
-    void Start() => Instantiate(objects[Random.Range(0, objects.Length)], transform.position, transform.rotation);
+    void Start()
+    {
+        Instantiate(objects[Random.Range(0, objects.Length)], transform.position, transform.rotation);
+        spawned = true;
+    }
 }
