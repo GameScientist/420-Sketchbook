@@ -15,12 +15,12 @@ public class Planter : MonoBehaviour
     private void Update()
     {
         if (!ReadyToPlant()) return;
-        for (int x = -4; x < 8; x++) for (int y = -4; y < 8; y++)
+        for (int x = -8; x < 16; x++) for (int y = -8; y < 16; y++)
             {
                 GameObject plant = PlantType();
                 if (plant != null)
                 {
-                    Physics.Raycast(new Vector3(Random.Range(x * 10, (x + 1) * 10), 80, Random.Range(y * 10, (y + 1) * 10)), Vector3.down, out RaycastHit spawnPoint);
+                    Physics.Raycast(new Vector3(Random.Range(x * 5, (x + 1) * 5), 80, Random.Range(y * 5, (y + 1) * 5)), Vector3.down, out RaycastHit spawnPoint);
                     Instantiate(plant, spawnPoint.point, Quaternion.Euler(0, Random.Range(0, 359), 0));
                 }
             }

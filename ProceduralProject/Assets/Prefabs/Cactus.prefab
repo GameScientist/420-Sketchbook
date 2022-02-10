@@ -96,5 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f6e37092f763447a9bcad8276439ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterations: 20
-  spreadDegress: 45
+  iterations: 30
+  turnDegrees: 5
+  twistDegrees: 45
+  alignWithParent: 0.75
+  branchNodeDistance: 4
+  branchNodeTrunk: 1
+  branchingType: 0

@@ -88,6 +88,7 @@ public class PlantDemo1 : MonoBehaviour
 
     void Grow(InstanceCollection instances, Vector3 pos, Quaternion rot, Vector3 scale, int max, int num = 0, float nodeSpin = 0)
     {
+        print(scale);
         if (num < 0) num = 0;
         if (num >= max) return; // stop recursion
 
@@ -157,7 +158,7 @@ public class PlantDemo1 : MonoBehaviour
                 float spin = nodeSpin + degreesBetweenNodes + 1;
                 Quaternion newRot = rot * Quaternion.Euler(lean, spin, 0);
 
-                float s = RandBell(.5f, .95f);
+                float s = .9f;//RandBell(.5f, .95f);
 
                 Grow(instances, endPoint, newRot, scale * s, max, num, 90);
             }

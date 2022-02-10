@@ -26,26 +26,11 @@ public class Cactus : MonoBehaviour
     private System.Random randGenerator;
 
     private Transform player;
-    private Quaternion playerDirection;
     private bool grown;
 
-    private float Rand()
-    {
-        return (float)randGenerator.NextDouble();
-    }
     private float Rand(float min, float max)
     {
-        return Rand() * (max - min) + min;
-    }
-    private float RandBell(float min, float max)
-    {
-        // 6, 6
-        // 2/12: (1/36)
-        // 7: (1/6)
-        // 2 to 12
-        // 1 to 6
-        min /= 2;
-        return Rand(min, max) + Rand(min, max);
+        return (float)randGenerator.NextDouble() * (max - min) + min;
     }
 
     // Start is called before the first frame update
@@ -53,15 +38,14 @@ public class Cactus : MonoBehaviour
     {
         randGenerator = new System.Random(seed);
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerDirection = Quaternion.LookRotation(player.transform.position) * Quaternion.Euler(90, 0, 0);
     }
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < 10 && !grown)
+        if (Vector3.Distance(transform.position, player.transform.position) < 7.5f && !grown)
         {
             grown = true;
-            StartCoroutine(Grow(new InstanceCollection(), Vector3.zero, playerDirection, new Vector3(.25f, 2, .25f), iterations));
+            StartCoroutine(Grow(new InstanceCollection(), Vector3.zero, PlayerDirection(), new Vector3(.5f, 1, .5f), iterations));
         }
     }
 
@@ -70,20 +54,21 @@ public class Cactus : MonoBehaviour
         if (num < 0) num = 0;
         if (num >= max) yield break; // stop recursion
 
-        yield return new WaitForSeconds(0.25f);
+        // add to num calc percent
+        float percentAtEnd = ++num / (float)max;
+
+        yield return new WaitForSeconds(Mathf.Lerp(0.017f, 0.25f, percentAtEnd)+Random.Range(-0.15f, 0.15f));
 
         // make a vube mess, add to list
 
         Matrix4x4 xform = Matrix4x4.TRS(pos, rot, scale);
         instances.AddBranch(MeshTools.MakeCube(), xform);
 
-        // add to num calc percent
-        float percentAtEnd = ++num / (float)max;
         Vector3 endPoint = xform.MultiplyPoint(new Vector3(0, 1, 0));
 
         if ((pos - endPoint).magnitude < .1f) yield break; // too small, stop recursion!
 
-        bool hasNode = (num >= branchNodeTrunk && (num - branchNodeTrunk - 1) % branchNodeDistance == 0);
+        bool hasNode = num >= branchNodeTrunk && (num - branchNodeTrunk - 1) % branchNodeDistance == 0;
 
         if (hasNode)
         {
@@ -91,15 +76,21 @@ public class Cactus : MonoBehaviour
             if (branchingType == BranchingType.Alternate1375) nodeSpin += 137.5f;
         }
 
-        {
-            Quaternion randRod = rot * Quaternion.Euler(turnDegrees, twistDegrees, 0);
-            Quaternion upRot = Quaternion.RotateTowards(rot, Quaternion.identity, 45);
+        Mesh mesh = new Mesh();
+        mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+        mesh.CombineMeshes(instances.branchInstances.ToArray());
 
+        MeshFilter meshFilter = GetComponent<MeshFilter>();
+        if (meshFilter) meshFilter.mesh = instances.MakeMultiMesh();
 
-            Quaternion newRot = Quaternion.Lerp(randRod, upRot, percentAtEnd);
-
-            StartCoroutine(Grow(instances, endPoint, newRot, scale * .9f, max, num, nodeSpin));
-        }
+        StartCoroutine(Grow(
+            instances,
+            endPoint,
+            Quaternion.Lerp(rot * Quaternion.Euler(turnDegrees, twistDegrees, 0), Quaternion.RotateTowards(rot, PlayerDirection(), 45), percentAtEnd),
+            scale * .9f,
+            max,
+            num,
+            nodeSpin));
 
         if (hasNode)
         {
@@ -132,16 +123,17 @@ public class Cactus : MonoBehaviour
                     break;
             }
 
-            float lean = Mathf.Lerp(90, 0, alignWithParent);
-            for (int i = 0; i < howMany; i++)
-            {
-                float spin = nodeSpin + degreesBetweenNodes + 1;
-                Quaternion newRot = rot * Quaternion.Euler(lean, spin, 0);
-
-                float s = RandBell(.5f, .95f);
-
-                StartCoroutine(Grow(instances, endPoint, newRot, scale * s, max, num, 90));
-            }
+            for (int i = 0; i < howMany; i++) StartCoroutine(Grow(
+                instances,
+                endPoint,
+                rot * Quaternion.Euler(Mathf.Lerp(90, 0, alignWithParent), nodeSpin + degreesBetweenNodes + 1, 0),
+                scale * 0.9f,
+                max,
+                num,
+                90));
         }
     }
+
+    Quaternion PlayerDirection() => Quaternion.LookRotation(player.transform.position - transform.position, Vector3.up) * Quaternion.Euler(90, 0, 0);
+
 }
