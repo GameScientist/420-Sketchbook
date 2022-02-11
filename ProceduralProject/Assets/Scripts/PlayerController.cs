@@ -6,12 +6,34 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    private float gravity = -10f, xRot = 0, verticalVelocity;
+    private float xRot = 0, verticalVelocity;
     private Camera cam;
     private CharacterController pawn;
-    private TextMeshProUGUI text;
     private int berries = 0;
-    public int berryGoal = 0;
+    [SerializeField]
+    private TextMeshProUGUI score;
+    [SerializeField]
+    private GameObject gameOver;
+    public GameObject panel;
+
+    public static PlayerController singleton { get; private set; }
+
+    private void Awake()
+    {
+        if (singleton)
+        {
+            print(singleton);
+            score.text = singleton.berries.ToString();
+            Destroy(gameObject);
+        }
+        else
+        {
+            singleton = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        transform.position = Vector3.up * 52.5f;
+        score.text = berries.ToString();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,31 +41,29 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         cam = GetComponentInChildren<Camera>();
         pawn = GetComponent<CharacterController>();
-        text = GameObject.Find("Text (TMP)").GetComponent<TextMeshProUGUI>();
-        text.text = "0/" + berryGoal;
+        panel = GetComponentInChildren<Image>().gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        pawn.Move(((transform.right * Input.GetAxis("Horizontal")) + (transform.forward * Input.GetAxis("Vertical"))) * 10f * Time.deltaTime);
+        pawn.Move(((transform.right * Input.GetAxis("Horizontal")) + (transform.forward * Input.GetAxis("Vertical"))) * 5f * Time.deltaTime);
         if (pawn.isGrounded)
         {
             verticalVelocity = -1f;
             if (Input.GetButton("Jump")) verticalVelocity = Mathf.Sqrt(80);
         }
-        verticalVelocity += gravity * Time.deltaTime;
+        verticalVelocity -= 10 * Time.deltaTime;
         pawn.Move(Vector3.up * verticalVelocity * Time.deltaTime);
 
         transform.Rotate(0, Input.GetAxis("Mouse X"), 0);
         xRot -= Input.GetAxis("Mouse Y");
-        cam.transform.localRotation = Quaternion.Euler(Mathf.Clamp(xRot, -45f, 45f), 0, 0);
+        cam.transform.localRotation = Quaternion.Euler(Mathf.Clamp(xRot, -90f, 90f), 0, 0);
     }
 
-    public void GameOver(bool victorius)
+    public void GameOver()
     {
-        if (victorius) text.text = "You're stuffed!";
-        else text.text = "You died!";
+        gameOver.SetActive(true);
         Destroy(pawn);
         Destroy(this);
     }
@@ -51,20 +71,6 @@ public class PlayerController : MonoBehaviour
     public void EatBerries()
     {
         berries++;
-        if (berries >= berryGoal) GameOver(true);
-        else text.text = berries + "/" + berryGoal;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        GameObject collisionObject = collision.gameObject;
-        if (gameObject.GetComponent<Berry>() != null)
-        {
-            Destroy(collisionObject);
-            berries++;
-            if (berries >= berryGoal) GameOver(true);
-            else text.text = berries + "/" + berryGoal;
-        }
-        else if (collisionObject.GetComponent<Cactus>() != null) GameOver(false);
+        score.text = berries.ToString();
     }
 }

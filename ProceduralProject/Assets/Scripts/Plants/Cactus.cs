@@ -7,9 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(MeshCollider))]
 public class Cactus : MonoBehaviour
 {
-    [Range(0, 100000000)]
-    private int seed = 0;
-
     [Range(5, 30)]
     public int iterations = 5, turnDegrees = 10;
 
@@ -23,8 +20,6 @@ public class Cactus : MonoBehaviour
     public int branchNodeDistance = 2, branchNodeTrunk = 1;
 
     public BranchingType branchingType;
-
-    private System.Random randGenerator;
 
     private bool grown;
     public Transform player;
@@ -129,6 +124,6 @@ public class Cactus : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) other.GetComponent<PlayerController>().GameOver(false);
+        if (other.CompareTag("Player")) other.GetComponent<PlayerController>().GameOver();
     }
 }

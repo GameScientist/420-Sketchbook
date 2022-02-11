@@ -27,6 +27,7 @@ public class ChunkMeshController : MonoBehaviour
     [Range(4, 40)]
     public int resolution = 10;
 
+    [Range(0f,1f)]
     public float densityThreshold = 0.5f;
 
     public NoiseField[] noiseFields;
@@ -45,7 +46,7 @@ public class ChunkMeshController : MonoBehaviour
     }
 
     private void OnValidate() => BuildMesh(new bool[resolution, resolution, resolution]);
-    void BuildMesh(bool[,,] voxels)
+    public void BuildMesh(bool[,,] voxels)
     {
         for (int x = 0; x < voxels.GetLength(0); x++)
         {
