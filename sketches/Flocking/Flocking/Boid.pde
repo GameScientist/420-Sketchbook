@@ -59,11 +59,6 @@ class Boid {
           numCohesion++;
         }
       }
-      
-      if (dis < radiusCohesion) {
-        centerOfGroup.add(b.position);
-        numCohesion++;
-      }
       if (dis < radiusSeparation) {
         PVector awayFromB = new PVector(-dx/dis, -dy/dis);
         awayFromB.mult(forceSeparation / dis);
