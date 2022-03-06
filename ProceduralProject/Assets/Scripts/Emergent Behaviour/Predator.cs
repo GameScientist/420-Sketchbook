@@ -18,26 +18,27 @@ public class Predator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        List<Vector3> destinations = new List<Vector3>();
+        bool foundDestination = false;
+        Vector3 destination = new Vector3();
         Boid[] boids = transform.parent.GetComponentsInChildren<Boid>();
+        GameObject[] nests = GameObject.FindGameObjectsWithTag("Avoider");
         if (boids[0] != null)
         {
-            destinations.Add(boids[0].transform.position);
-            int i = destinations.Count - 1;
-            foreach (Boid boid in boids) if (Vector3.Distance(transform.position, destinations[i]) > Vector3.Distance(transform.position, boid.transform.position)) destinations[i] = boid.transform.position;
+            destination = boids[0].transform.position;
+            foreach (Boid boid in boids) if (Vector3.Distance(transform.position, destination) > Vector3.Distance(transform.position, boid.transform.position)) destination = boid.transform.position;
+            foundDestination = true;
         }
-        GameObject[] nests = GameObject.FindGameObjectsWithTag("Avoiders");
-        if (nests[0] != null)
+        else if (nests[0] != null)
         {
-            destinations.Add(nests[0].transform.position);
-            int i = destinations.Count - 1;
-            foreach (GameObject nest in nests) if (Vector3.Distance(transform.position, destinations[i]) > Vector3.Distance(transform.position, nest.transform.position)) destinations[i] = nest.transform.position;
+            destination = nests[0].transform.position;
+            foreach (GameObject nest in nests) if (Vector3.Distance(transform.position, destination) > Vector3.Distance(transform.position, nest.transform.position)) destination = nest.transform.position;
+            foundDestination = true;
         }
-        Vector3 destination;
-        if (destinations.Count == 2) destination = (destinations[0] * 0.75f) + (destinations[1] / 4);
-        else destination = destinations[0];
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(destination - transform.position), 1 - Mathf.Pow(.05f, Time.deltaTime));
-        //body.velocity += transform.forward * Mathf.Lerp(1, acceleration, Mathf.Clamp01(Vector3.Distance(transform.position, destination) / 7));
-        //if(body.velocity.magnitude > speed) body.velocity = transform.forward * 
+        if (foundDestination) transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(destination - transform.position), .9f);
+        RaycastHit hit;
+        Physics.Raycast(transform.position, destination - transform.position, out hit);
+        Debug.DrawLine(transform.position, destination);
+        if (Vector3.Distance(transform.position, hit.point) > .2f) body.velocity += transform.forward * acceleration;
+        if (body.velocity.magnitude > speed) body.velocity = transform.forward * speed;
     }
 }
