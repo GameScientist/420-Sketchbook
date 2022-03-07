@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Prey : MonoBehaviour
 {
-    private float avoidForce;
     private float forceSeparation = 1;
     private float forceCohesion = 1;
     private float forceAlignment = .25f;
+    private float forceWall = 1;
     private float speed = 1;
-    private float steering;
-    private float acceleration;
     private BoidManager manager;
     private Rigidbody body;
     public Vector3 currentVelocity;
@@ -36,8 +34,8 @@ public class Prey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 force = new Vector3(), groupCenter = new Vector3(), groupAlignment = new Vector3();
-        int cohesiveBoids = 0, alignedBoids = 0;
+        Vector3 force = new Vector3(), groupCenter = new Vector3(), groupAlignment = new Vector3(), groupSeperation = new Vector3();
+        int cohesiveBoids = 0, alignedBoids = 0, separatedBoids = 0;
         foreach (Prey prey in manager.preys)
         {
             if (prey == this) continue;
@@ -53,17 +51,23 @@ public class Prey : MonoBehaviour
                 alignedBoids++;
             }
             if (distance < 1) force += -(prey.transform.position - transform.position) / distance * forceSeparation / distance;
+            {
+                groupSeperation += (transform.position - prey.transform.position).normalized;
+                separatedBoids++;
+            }
         }
-        Debug.DrawRay(transform.position, force, Color.red);
-        Debug.DrawRay(transform.position, ((groupCenter / cohesiveBoids - transform.position).normalized * speed - body.velocity).normalized * forceCohesion, Color.blue);
-        if (cohesiveBoids > 0) force += ((groupCenter / cohesiveBoids - transform.position).normalized * speed - body.velocity).normalized * forceCohesion;
-        Debug.DrawRay(transform.position, ((groupAlignment / alignedBoids * speed) - body.velocity).normalized * forceAlignment, Color.green);
-        if (alignedBoids > 0) force += ((groupAlignment / alignedBoids * speed) - body.velocity).normalized * forceAlignment;
+        RaycastHit hit;
+        Physics.Raycast(transform.position, transform.forward, out hit, 1);
+        if (hit.collider) force += (transform.position-hit.point).normalized;
+        if (cohesiveBoids > 0) force += (groupCenter / cohesiveBoids - transform.position).normalized * forceCohesion;
+        if (alignedBoids > 0) force += (groupAlignment / alignedBoids - body.velocity).normalized * forceAlignment;
+        if (separatedBoids > 0) force += groupSeperation.normalized * forceSeparation;
+        if (force.magnitude > speed) force = force.normalized * speed;
         body.AddForce(force);
         transform.rotation = Quaternion.LookRotation(body.velocity);
         Debug.DrawRay(transform.position, body.velocity);
         direction = body.velocity / body.velocity.magnitude;
-        print(force);
+        //print(force);
         /*currentVelocity = body.velocity;
         Vector3 seperationDestination = new Vector3(), alignmentDestination = new Vector3(), cohesionDestination = new Vector3();
         int separationBoids = 0, alignmentBoids = 0, cohesionBoids = 0;

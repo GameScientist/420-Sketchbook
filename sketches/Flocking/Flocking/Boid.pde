@@ -108,6 +108,12 @@ class Boid {
     
     _dir = PVector.div(velocity, velocity.mag());
 
-    ellipse(position.x, position.y, 10, 10);
+    //ellipse(position.x, position.y, 10, 10);
+    float a = velocity.heading();
+    pushMatrix(); // begin transform...
+    translate(position.x, position.y);
+    rotate(a);
+    triangle(5, 0, -10, 5, -10, -5);
+    popMatrix(); // end transform...
   }
 }
