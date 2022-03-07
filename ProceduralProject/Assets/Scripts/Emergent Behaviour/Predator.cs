@@ -40,12 +40,12 @@ public class Predator : MonoBehaviour
         }
         bool foundDestination = false;
         Vector3 destination = new Vector3();
-        Boid[] boids = transform.parent.GetComponentsInChildren<Boid>();
+        Prey[] boids = transform.parent.GetComponentsInChildren<Prey>();
         GameObject[] nests = GameObject.FindGameObjectsWithTag("Avoider");
         if (boids.Length > 0 && fullness < stomachRoom)
         {
             destination = boids[0].transform.position;
-            foreach (Boid boid in boids) if (Vector3.Distance(transform.position, destination) > Vector3.Distance(transform.position, boid.transform.position)) destination = boid.transform.position;
+            foreach (Prey boid in boids) if (Vector3.Distance(transform.position, destination) > Vector3.Distance(transform.position, boid.transform.position)) destination = boid.transform.position;
             if (!foundDestination) foundDestination = true;
         }
         else if (nests.Length > 0)
@@ -67,6 +67,6 @@ public class Predator : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<Boid>() != null) fullness += savoriness;
+        if (collision.gameObject.GetComponent<Prey>() != null) fullness += savoriness;
     }
 }

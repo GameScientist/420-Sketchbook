@@ -2,33 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boid : MonoBehaviour
+public class Prey : MonoBehaviour
 {
     private float avoidForce;
-    private float separationForce;
-    private float speed;
+    private float forceSeparation = 1;
+    private float forceCohesion = 1;
+    private float forceAlignment = .25f;
+    private float speed = 1;
     private float steering;
     private float acceleration;
+    private BoidManager manager;
     private Rigidbody body;
     public Vector3 currentVelocity;
+    public Vector3 direction = new Vector3();
     // Start is called before the first frame update
     void Start()
     {
-        body = GetComponent<Rigidbody>();
-        separationForce = Random.Range(.1f, .5f);
+        /*
+        forceSeparation = Random.Range(.1f, .5f);
         avoidForce = Random.Range(.1f, 7);
         speed = Random.Range(0.1f, 4f);
         acceleration = speed * Random.Range(.1f, 1);
         steering = Random.Range(.1f, .9f);
         transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
         body.velocity = transform.forward;
-        currentVelocity = body.velocity;
+        currentVelocity = body.velocity;*/
+        body = GetComponent<Rigidbody>();
+        manager = BoidManager.singleton;
+        manager.preys.Add(this);
+        body.AddForce(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * speed);
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentVelocity = body.velocity;
+        Vector3 force = new Vector3(), groupCenter = new Vector3(), groupAlignment = new Vector3();
+        int cohesiveBoids = 0, alignedBoids = 0;
+        foreach (Prey prey in manager.preys)
+        {
+            if (prey == this) continue;
+            float distance = Vector3.Distance(transform.position, prey.transform.position);
+            if (distance < 5)
+            {
+                groupCenter += prey.transform.position;
+                cohesiveBoids++;
+            }
+            if (distance < 3)
+            {
+                groupAlignment += prey.body.velocity;
+                alignedBoids++;
+            }
+            if (distance < 1) force += -(prey.transform.position - transform.position) / distance * forceSeparation / distance;
+        }
+        Debug.DrawRay(transform.position, force, Color.red);
+        Debug.DrawRay(transform.position, ((groupCenter / cohesiveBoids - transform.position).normalized * speed - body.velocity).normalized * forceCohesion, Color.blue);
+        if (cohesiveBoids > 0) force += ((groupCenter / cohesiveBoids - transform.position).normalized * speed - body.velocity).normalized * forceCohesion;
+        Debug.DrawRay(transform.position, ((groupAlignment / alignedBoids * speed) - body.velocity).normalized * forceAlignment, Color.green);
+        if (alignedBoids > 0) force += ((groupAlignment / alignedBoids * speed) - body.velocity).normalized * forceAlignment;
+        body.AddForce(force);
+        transform.rotation = Quaternion.LookRotation(body.velocity);
+        Debug.DrawRay(transform.position, body.velocity);
+        direction = body.velocity / body.velocity.magnitude;
+        print(force);
+        /*currentVelocity = body.velocity;
         Vector3 seperationDestination = new Vector3(), alignmentDestination = new Vector3(), cohesionDestination = new Vector3();
         int separationBoids = 0, alignmentBoids = 0, cohesionBoids = 0;
         bool nearbyDestination = false;
@@ -129,6 +165,8 @@ public class Boid : MonoBehaviour
         }
         body.velocity += transform.forward * acceleration;
         if (body.velocity.magnitude > speed) body.velocity = transform.forward * speed;
+        */
+
     }
 
     private void OnCollisionEnter(Collision collision)
