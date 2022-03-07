@@ -19,7 +19,6 @@ public class Predator : MonoBehaviour
         speed = Random.Range(0.1f, 4f);
         acceleration = speed * Random.Range(.1f, 1);
         stomachRoom = Random.Range(1f, 60f);
-        print(stomachRoom);
         fullness = stomachRoom / 2;
         savoriness = stomachRoom * Random.Range(.1f, 1f);
         deathTime = Random.Range(3f, 5f);
@@ -55,7 +54,7 @@ public class Predator : MonoBehaviour
             foreach (GameObject nest in nests) if (Vector3.Distance(transform.position, destination) > Vector3.Distance(transform.position, nest.transform.position) && nest.GetComponent<Predator>() == null) destination = nest.transform.position;
             if (!foundDestination) foundDestination = true;
         }
-        Debug.DrawLine(transform.position, destination);
+        //Debug.DrawLine(transform.position, destination);
         if (foundDestination) transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(destination - transform.position), .9f);
         if (Vector3.Distance(transform.position, destination) > .2f) body.velocity += transform.forward * acceleration * Mathf.Abs(fullness - (stomachRoom / 2) / stomachRoom / 2);
         if (body.velocity.magnitude > speed)

@@ -31,6 +31,7 @@ public class Boid : MonoBehaviour
         currentVelocity = body.velocity;
         Vector3 seperationDestination = new Vector3(), alignmentDestination = new Vector3(), cohesionDestination = new Vector3();
         int separationBoids = 0, alignmentBoids = 0, cohesionBoids = 0;
+        bool nearbyDestination = false;
         foreach (Boid boid in transform.parent.GetComponentsInChildren<Boid>())
         {
             if (boid == this) continue;
@@ -41,6 +42,7 @@ public class Boid : MonoBehaviour
                 seperationDestination += Vector3.Lerp(transform.position - (boid.transform.position - transform.position), transform.position, distance / 1.4f);
                 //seperationDestination += transform.position - ((boid.transform.position - transform.position) * (separationForce/distance));
                 separationBoids++;
+                nearbyDestination = true;
             }
             //print(body.velocity);
             if (distance < 2.8)
@@ -49,12 +51,14 @@ public class Boid : MonoBehaviour
                 //alignmentDestination += boid.currentVelocity.normalized + transform.position;
                 alignmentDestination += Vector3.Lerp(boid.currentVelocity.normalized + transform.position, transform.position, distance / 2.8f);
                 alignmentBoids++;
+                nearbyDestination = true;
             }
             if (distance < 5.6)
             {
                 //cohesionDestination += boid.transform.position;
                 cohesionDestination += Vector3.Lerp(boid.transform.position, transform.position, distance / 5.6f);
                 cohesionBoids++;
+                nearbyDestination = true;
             }
         }
         bool nearbyAvoider = false;
@@ -67,6 +71,7 @@ public class Boid : MonoBehaviour
                 avoidDestination = transform.position - ((avoidDestination - transform.position) * (avoidForce / distance));
                 avoidDestination = Vector3.Lerp(transform.position - (avoidDestination - transform.position), transform.position, distance / 4.2f);
                 if (!nearbyAvoider) nearbyAvoider = true;
+                nearbyDestination = true;
             }
         }
         Vector3 attractDestination = new Vector3();
@@ -77,44 +82,52 @@ public class Boid : MonoBehaviour
             {
                 attractDestination = attractor.transform.position;
                 if (!nearbyAttractor) nearbyAttractor = true;
+                nearbyDestination = true;
             }
         }
-        Vector3 finalDestination = new Vector3();
-        int subdestinations = 1;
-        if (separationBoids > 0)
+        if (nearbyDestination)
         {
-            seperationDestination /= separationBoids;
-            Debug.DrawLine(transform.position, seperationDestination, Color.red);
-            finalDestination += seperationDestination / 2;
-            if (subdestinations == 0) subdestinations++;
+            Vector3 finalDestination = new Vector3();
+            int subdestinations = 0;
+            if (separationBoids > 0)
+            {
+                seperationDestination /= separationBoids;
+                Debug.DrawLine(transform.position, seperationDestination, Color.yellow);
+                finalDestination += seperationDestination / 2;
+                subdestinations++;
+            }
+            if (alignmentBoids > 0)
+            {
+                //Debug.DrawLine(transform.position, alignmentDestination, Color.green);
+                alignmentDestination /= alignmentBoids;
+                Debug.DrawLine(transform.position, alignmentDestination, Color.magenta);
+                finalDestination += alignmentDestination * .375f;
+                subdestinations++;
+            }
+            if (cohesionBoids > 0)
+            {
+                cohesionDestination /= cohesionBoids;
+                Debug.DrawLine(transform.position, cohesionDestination, Color.cyan);
+                finalDestination += cohesionDestination / 8;
+                subdestinations++;
+            }
+            Debug.DrawLine(transform.position, seperationDestination + alignmentDestination + cohesionDestination);
+            if (nearbyAvoider)
+            {
+                Debug.DrawLine(transform.position, avoidDestination, Color.red);
+                finalDestination += avoidDestination;
+                subdestinations++;
+            }
+            if (nearbyAttractor)
+            {
+                Debug.DrawLine(transform.position, avoidDestination, Color.blue);
+                finalDestination += attractDestination;
+                subdestinations++;
+            }
+            //Debug.DrawLine(transform.position, finalDestination / subdestinations, Color.green);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(finalDestination / subdestinations - transform.position), steering);
         }
-        if (alignmentBoids > 0)
-        {
-            //Debug.DrawLine(transform.position, alignmentDestination, Color.green);
-            alignmentDestination /= alignmentBoids;
-            //Debug.DrawLine(transform.position, alignmentDestination, Color.green);
-            finalDestination += alignmentDestination * .375f;
-            if (subdestinations == 0) subdestinations++;
-        }
-        if (cohesionBoids > 0)
-        {
-            cohesionDestination /= cohesionBoids;
-            //Debug.DrawLine(transform.position, cohesionDestination, Color.blue);
-            finalDestination += cohesionDestination / 8;
-            if (subdestinations == 0) subdestinations++;
-        }
-        if (nearbyAvoider)
-        {
-            finalDestination += avoidDestination;
-            subdestinations++;
-        }
-        if (nearbyAttractor)
-        {
-            finalDestination += attractDestination;
-            subdestinations++;
-        }
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(finalDestination / subdestinations - transform.position), steering);
-        if (Vector3.Distance(transform.position, finalDestination) > 0.1) body.velocity += transform.forward * acceleration;
+        body.velocity += transform.forward * acceleration;
         if (body.velocity.magnitude > speed) body.velocity = transform.forward * speed;
     }
 
