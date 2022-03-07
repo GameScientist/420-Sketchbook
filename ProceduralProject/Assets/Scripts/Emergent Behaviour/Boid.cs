@@ -16,8 +16,8 @@ public class Boid : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
         separationForce = Random.Range(.1f, .5f);
-        avoidForce = Random.Range(.1f, 1);
-        speed = Random.Range(0.1f, 6f);
+        avoidForce = Random.Range(.1f, 7);
+        speed = Random.Range(0.1f, 4f);
         acceleration = speed * Random.Range(.1f, 1);
         steering = Random.Range(.1f, .9f);
         transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
@@ -113,11 +113,14 @@ public class Boid : MonoBehaviour
             finalDestination += attractDestination;
             subdestinations++;
         }
-        RaycastHit hit;
-        Physics.Raycast(transform.position, finalDestination - transform.position, out hit);
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(finalDestination / subdestinations - transform.position), steering);
-        if (Vector3.Distance(transform.position, hit.point) > 0.1) body.velocity += transform.forward * acceleration;
+        if (Vector3.Distance(transform.position, finalDestination) > 0.1) body.velocity += transform.forward * acceleration;
         if (body.velocity.magnitude > speed) body.velocity = transform.forward * speed;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Avoider")) Destroy(gameObject);
     }
 }
 
