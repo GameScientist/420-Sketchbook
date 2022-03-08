@@ -4,29 +4,23 @@ using UnityEngine;
 
 public class Prey : MonoBehaviour
 {
-    private float forceSeparation = 1;
-    private float forceCohesion = 1;
-    private float forceAlignment = .25f;
-    private float forceWall = 1;
-    private float speed = 1;
+    private float forceSeparation = 1f;
+    private float forceCohesion = .25f;
+    private float forceAlignment = .75f;
+    private float forceAvoid = 2;
+    private float forceAttract = 1;
+    private float speed;
+    private float perception;
     private BoidManager manager;
     private Rigidbody body;
-    public Vector3 currentVelocity;
-    public Vector3 direction = new Vector3();
+    public Vector3 direction = new();
     // Start is called before the first frame update
     void Start()
     {
-        /*
-        forceSeparation = Random.Range(.1f, .5f);
-        avoidForce = Random.Range(.1f, 7);
-        speed = Random.Range(0.1f, 4f);
-        acceleration = speed * Random.Range(.1f, 1);
-        steering = Random.Range(.1f, .9f);
-        transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
-        body.velocity = transform.forward;
-        currentVelocity = body.velocity;*/
         body = GetComponent<Rigidbody>();
         manager = BoidManager.singleton;
+        speed = Random.Range(1f, 2f);
+        perception = Random.Range(0f, 1f);
         manager.preys.Add(this);
         body.AddForce(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * speed);
     }
@@ -34,148 +28,101 @@ public class Prey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 force = GroupMovement();
+        force = NestMovement(10 * perception, manager.preyNests, force, transform.position, forceAttract);
+        force = NestMovement(3 * perception, manager.predatorNests, force, Vector3.zero, forceAvoid);
+        if (force.magnitude > speed) force = force.normalized * speed;
+        body.AddForce(force * Time.deltaTime);
+        transform.rotation = Quaternion.LookRotation(body.velocity);
+    }
+
+    private Vector3 AvoidMovement(Vector3 force)
+    {
+        Vector3 avoider = new Vector3();
+        float avoidDistance = 3;
+        foreach (Nest predatorNest in manager.predatorNests)
+        {
+            float potentialDistance = Vector3.Distance(transform.position, predatorNest.transform.position);
+            if (potentialDistance < avoidDistance)
+            {
+                avoider = (transform.position - predatorNest.transform.position).normalized;
+                avoidDistance = potentialDistance;
+            }
+        }
+        if (avoidDistance < 3) force += avoider.normalized * forceAvoid;
+        return force;
+    }
+
+    private Vector3 AttractionMovement(Vector3 force)
+    {
+        Vector3 attractor = new Vector3();
+        float attractionDistance = 10;
+        foreach (Nest preyNest in manager.preyNests)
+        {
+            float potentialDistance = Vector3.Distance(transform.position, preyNest.transform.position);
+            if (potentialDistance < attractionDistance)
+            {
+                attractor = preyNest.transform.position;
+                attractionDistance = potentialDistance;
+            }
+        }
+        if (attractionDistance < 10) force += (attractor - transform.position).normalized * forceAttract;
+        return force;
+    }
+
+    private Vector3 NestMovement(float maxDistance, List<Nest> nests, Vector3 force, Vector3 positionModifier, float forceModifier)
+    {
+        Vector3 objectPosition = new Vector3();
+        float distance = maxDistance;
+        foreach(Nest nest in nests)
+        {
+            float potentialDistance = Vector3.Distance(transform.position, nest.transform.position);
+            if(potentialDistance < distance)
+            {
+                if (nest.predator) objectPosition = (transform.position - nest.transform.position).normalized;
+                else objectPosition = nest.transform.position;
+                distance = potentialDistance;
+            }
+        }
+        if (distance < maxDistance) force += (objectPosition - positionModifier).normalized * forceModifier;
+        return force;
+    }
+
+    private Vector3 GroupMovement()
+    {
         Vector3 force = new Vector3(), groupCenter = new Vector3(), groupAlignment = new Vector3(), groupSeperation = new Vector3();
         int cohesiveBoids = 0, alignedBoids = 0, separatedBoids = 0;
         foreach (Prey prey in manager.preys)
         {
             if (prey == this) continue;
             float distance = Vector3.Distance(transform.position, prey.transform.position);
-            if (distance < 5)
+            if (distance < 4 * perception)
             {
-                groupCenter += prey.transform.position;
+                groupCenter += prey.transform.position / distance;
                 cohesiveBoids++;
             }
-            if (distance < 3)
+            if (distance < 2 * perception)
             {
-                groupAlignment += prey.body.velocity;
+                groupAlignment += prey.body.velocity / distance;
                 alignedBoids++;
             }
-            if (distance < 1) force += -(prey.transform.position - transform.position) / distance * forceSeparation / distance;
+            if (distance < .5f * perception)
             {
-                groupSeperation += (transform.position - prey.transform.position).normalized;
+                groupSeperation += (transform.position - prey.transform.position).normalized / distance;
                 separatedBoids++;
             }
         }
-        RaycastHit hit;
-        Physics.Raycast(transform.position, transform.forward, out hit, 1);
-        if (hit.collider) force += (transform.position-hit.point).normalized;
         if (cohesiveBoids > 0) force += (groupCenter / cohesiveBoids - transform.position).normalized * forceCohesion;
         if (alignedBoids > 0) force += (groupAlignment / alignedBoids - body.velocity).normalized * forceAlignment;
-        if (separatedBoids > 0) force += groupSeperation.normalized * forceSeparation;
-        if (force.magnitude > speed) force = force.normalized * speed;
-        body.AddForce(force);
-        transform.rotation = Quaternion.LookRotation(body.velocity);
-        Debug.DrawRay(transform.position, body.velocity);
-        direction = body.velocity / body.velocity.magnitude;
-        //print(force);
-        /*currentVelocity = body.velocity;
-        Vector3 seperationDestination = new Vector3(), alignmentDestination = new Vector3(), cohesionDestination = new Vector3();
-        int separationBoids = 0, alignmentBoids = 0, cohesionBoids = 0;
-        bool nearbyDestination = false;
-        foreach (Boid boid in transform.parent.GetComponentsInChildren<Boid>())
-        {
-            if (boid == this) continue;
-            float distance = Vector3.Distance(boid.transform.position, transform.position);
-            if (distance < 1.4)
-            {
-                //Debug.DrawLine(transform.position, transform.position + transform.position - boid.transform.position, Color.red);
-                seperationDestination += Vector3.Lerp(transform.position - (boid.transform.position - transform.position), transform.position, distance / 1.4f);
-                //seperationDestination += transform.position - ((boid.transform.position - transform.position) * (separationForce/distance));
-                separationBoids++;
-                nearbyDestination = true;
-            }
-            //print(body.velocity);
-            if (distance < 2.8)
-            {
-                //Debug.DrawLine(transform.position, boid.currentVelocity.normalized + transform.position, Color.green);
-                //alignmentDestination += boid.currentVelocity.normalized + transform.position;
-                alignmentDestination += Vector3.Lerp(boid.currentVelocity.normalized + transform.position, transform.position, distance / 2.8f);
-                alignmentBoids++;
-                nearbyDestination = true;
-            }
-            if (distance < 5.6)
-            {
-                //cohesionDestination += boid.transform.position;
-                cohesionDestination += Vector3.Lerp(boid.transform.position, transform.position, distance / 5.6f);
-                cohesionBoids++;
-                nearbyDestination = true;
-            }
-        }
-        bool nearbyAvoider = false;
-        Vector3 avoidDestination = new Vector3();
-        foreach (GameObject avoider in GameObject.FindGameObjectsWithTag("Avoider"))
-        {
-            float distance = Vector3.Distance(avoider.transform.position, transform.position);
-            if (distance < 4.2 && (distance < Vector3.Distance(avoidDestination, transform.position) || !nearbyAvoider))
-            {
-                avoidDestination = transform.position - ((avoidDestination - transform.position) * (avoidForce / distance));
-                avoidDestination = Vector3.Lerp(transform.position - (avoidDestination - transform.position), transform.position, distance / 4.2f);
-                if (!nearbyAvoider) nearbyAvoider = true;
-                nearbyDestination = true;
-            }
-        }
-        Vector3 attractDestination = new Vector3();
-        bool nearbyAttractor = false;
-        foreach (GameObject attractor in GameObject.FindGameObjectsWithTag("Attractor"))
-        {
-            if (Vector3.Distance(attractor.transform.position, transform.position) < Vector3.Distance(attractDestination, transform.position) || !nearbyAttractor)
-            {
-                attractDestination = attractor.transform.position;
-                if (!nearbyAttractor) nearbyAttractor = true;
-                nearbyDestination = true;
-            }
-        }
-        if (nearbyDestination)
-        {
-            Vector3 finalDestination = new Vector3();
-            int subdestinations = 0;
-            if (separationBoids > 0)
-            {
-                seperationDestination /= separationBoids;
-                Debug.DrawLine(transform.position, seperationDestination, Color.yellow);
-                finalDestination += seperationDestination / 2;
-                subdestinations++;
-            }
-            if (alignmentBoids > 0)
-            {
-                //Debug.DrawLine(transform.position, alignmentDestination, Color.green);
-                alignmentDestination /= alignmentBoids;
-                Debug.DrawLine(transform.position, alignmentDestination, Color.magenta);
-                finalDestination += alignmentDestination * .375f;
-                subdestinations++;
-            }
-            if (cohesionBoids > 0)
-            {
-                cohesionDestination /= cohesionBoids;
-                Debug.DrawLine(transform.position, cohesionDestination, Color.cyan);
-                finalDestination += cohesionDestination / 8;
-                subdestinations++;
-            }
-            Debug.DrawLine(transform.position, seperationDestination + alignmentDestination + cohesionDestination);
-            if (nearbyAvoider)
-            {
-                Debug.DrawLine(transform.position, avoidDestination, Color.red);
-                finalDestination += avoidDestination;
-                subdestinations++;
-            }
-            if (nearbyAttractor)
-            {
-                Debug.DrawLine(transform.position, avoidDestination, Color.blue);
-                finalDestination += attractDestination;
-                subdestinations++;
-            }
-            //Debug.DrawLine(transform.position, finalDestination / subdestinations, Color.green);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(finalDestination / subdestinations - transform.position), steering);
-        }
-        body.velocity += transform.forward * acceleration;
-        if (body.velocity.magnitude > speed) body.velocity = transform.forward * speed;
-        */
-
+        if (separatedBoids > 0) force += (groupSeperation / separatedBoids).normalized * forceSeparation;
+        return force;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Avoider")) Destroy(gameObject);
+        if (collision.gameObject.GetComponent<Predator>()) Destroy(gameObject);
     }
+
+    private void OnDestroy() => manager.preys.Remove(this);
 }
 

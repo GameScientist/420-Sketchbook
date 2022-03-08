@@ -15,14 +15,14 @@ public class Nest : MonoBehaviour
     public bool predator;
     public Transform boidGroup;
     private float timer = 0;
-    private void OnValidate() => Toggle();
+    //private void OnValidate() => Toggle();
 
     private void Start() => Toggle();
 
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
+        /*timer -= Time.deltaTime;
         if(timer <= 0)
         {
             if (predator)
@@ -35,7 +35,7 @@ public class Nest : MonoBehaviour
                 Instantiate(preyPrefab, transform.position + new Vector3(Random.Range(-.4f, .4f), Random.Range(-.4f, .4f), Random.Range(-.4f, .4f)), transform.rotation, boidGroup);
                 timer = Random.Range(.1f, 8);
             }
-        }
+        }*/
     }
 
     public void Toggle()
@@ -43,12 +43,12 @@ public class Nest : MonoBehaviour
         if (predator)
         {
             GetComponent<Renderer>().material = predatorMaterial;
-            transform.tag = "Avoider";
+            BoidManager.singleton.predatorNests.Add(this);
         }
         else
         {
             GetComponent<Renderer>().material = preyMaterial;
-            transform.tag = "Untagged";
+            BoidManager.singleton.preyNests.Add(this);
         }
     }
 }
