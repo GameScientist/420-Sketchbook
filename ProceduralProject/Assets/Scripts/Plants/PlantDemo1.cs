@@ -88,7 +88,6 @@ public class PlantDemo1 : MonoBehaviour
 
     void Grow(InstanceCollection instances, Vector3 pos, Quaternion rot, Vector3 scale, int max, int num = 0, float nodeSpin = 0)
     {
-        print(scale);
         if (num < 0) num = 0;
         if (num >= max) return; // stop recursion
 
