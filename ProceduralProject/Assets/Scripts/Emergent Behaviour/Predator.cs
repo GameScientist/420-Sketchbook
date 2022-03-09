@@ -6,29 +6,30 @@ public class Predator : MonoBehaviour
 {
     private float speed;
     private float fullness;
-    private float deathTime;
-    private bool dead = false;
     private Rigidbody body;
     private BoidManager manager;
+    [SerializeField]
+    private GameObject poopPrefab;
+    private float poopTimer;
+    private float poopBurstTimer = 0;
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody>();
         speed = Random.Range(1f, 2f);
-        fullness = Random.Range(10, 100);
-        deathTime = Random.Range(3f, 5f);
+        fullness = Random.Range(10f, 100f);
         manager = BoidManager.singleton;
+        poopTimer = Random.Range(1f, 6f);
     }
 
     // Update is called once per frame
     void Update()
     {
         fullness -= Time.deltaTime;
-        if (fullness <= 0) dead = true;
-        if (dead)
+        if (fullness <= 0)
         {
-            deathTime -= Time.deltaTime;
-            if (deathTime <= 0)
+            body.useGravity = true;
+            if (fullness <= -5f)
             {
                 manager.predators.Remove(this);
                 Destroy(gameObject);
@@ -37,6 +38,17 @@ public class Predator : MonoBehaviour
         }
         Move();
         transform.rotation = Quaternion.LookRotation(body.velocity);
+        if (poopTimer <= 0)
+        {
+            poopBurstTimer -= Time.deltaTime;
+            if (poopBurstTimer <= 0)
+            {
+                manager.poop.Add(Instantiate(poopPrefab, transform.position - (transform.up/2), transform.rotation, null));
+                if (Random.Range(0f, 1f) < .1f) poopTimer = Random.Range(1f, 6f);
+                else poopBurstTimer = Random.Range(.1f, 1);
+            }
+        }
+        else poopTimer -= Time.deltaTime;
     }
 
     private void Move()
@@ -66,7 +78,7 @@ public class Predator : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (dead) return;
+        if (fullness <= 0) return;
         Prey prey = collision.gameObject.GetComponent<Prey>();
         if (prey != null) fullness += Random.Range(1f, 10f);
     }

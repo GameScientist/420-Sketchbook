@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Prey : MonoBehaviour
 {
-    private float forceSeparation = 1f;
-    private float forceCohesion = .25f;
-    private float forceAlignment = .75f;
+    private float forceSeparation = .5f;
+    private float forceCohesion = .125f;
+    private float forceAlignment = .575f;
     private float forceAvoid = 2;
-    private float forceAttract = 1;
+    private float forceAttract = 3;
     private float speed;
     private float perception;
     private BoidManager manager;
     private Rigidbody body;
     public Vector3 direction = new();
+    private float fullness;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class Prey : MonoBehaviour
         manager = BoidManager.singleton;
         speed = Random.Range(1f, 2f);
         perception = Random.Range(0f, 1f);
+        fullness = Random.Range(10f, 100f);
         manager.preys.Add(this);
         body.AddForce(new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * speed);
     }
@@ -28,9 +30,20 @@ public class Prey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        fullness -= Time.deltaTime;
+        if (fullness <= 0)
+        {
+            body.useGravity = true;
+            if (fullness <= -5f)
+            {
+                manager.preys.Remove(this);
+                Destroy(gameObject);
+            }
+            return;
+        }
         Vector3 force = GroupMovement();
-        force = NestMovement(10 * perception, manager.preyNests, force, transform.position, forceAttract);
-        force = NestMovement(3 * perception, manager.predatorNests, force, Vector3.zero, forceAvoid);
+        force = AttractionMovement(force);
+        force = AvoidMovement(force);
         if (force.magnitude > speed) force = force.normalized * speed;
         body.AddForce(force * Time.deltaTime);
         transform.rotation = Quaternion.LookRotation(body.velocity);
@@ -57,15 +70,24 @@ public class Prey : MonoBehaviour
     {
         Vector3 attractor = new Vector3();
         float attractionDistance = 10;
-        foreach (Nest preyNest in manager.preyNests)
-        {
-            float potentialDistance = Vector3.Distance(transform.position, preyNest.transform.position);
-            if (potentialDistance < attractionDistance)
+        if(manager.poop.Count > 0) foreach(GameObject poop in manager.poop)
             {
-                attractor = preyNest.transform.position;
-                attractionDistance = potentialDistance;
+                float potentialDistance = Vector3.Distance(transform.position, poop.transform.position);
+                if (potentialDistance < attractionDistance)
+                {
+                    attractor = poop.transform.position;
+                    attractionDistance = potentialDistance;
+                }
             }
-        }
+        else if (manager.preyNests.Count > 0) foreach (Nest preyNest in manager.preyNests)
+            {
+                float potentialDistance = Vector3.Distance(transform.position, preyNest.transform.position);
+                if (potentialDistance < attractionDistance)
+                {
+                    attractor = preyNest.transform.position;
+                    attractionDistance = potentialDistance;
+                }
+            }
         if (attractionDistance < 10) force += (attractor - transform.position).normalized * forceAttract;
         return force;
     }
@@ -74,10 +96,10 @@ public class Prey : MonoBehaviour
     {
         Vector3 objectPosition = new Vector3();
         float distance = maxDistance;
-        foreach(Nest nest in nests)
+        foreach (Nest nest in nests)
         {
             float potentialDistance = Vector3.Distance(transform.position, nest.transform.position);
-            if(potentialDistance < distance)
+            if (potentialDistance < distance)
             {
                 if (nest.predator) objectPosition = (transform.position - nest.transform.position).normalized;
                 else objectPosition = nest.transform.position;
@@ -120,6 +142,12 @@ public class Prey : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Poop"))
+        {
+            manager.poop.Remove(collision.gameObject);
+            Destroy(collision.gameObject);
+            fullness += Random.Range(1f, 10f);
+        }
         if (collision.gameObject.GetComponent<Predator>()) Destroy(gameObject);
     }
 

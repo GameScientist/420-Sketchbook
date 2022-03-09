@@ -9,6 +9,7 @@ public class BoidManager : MonoBehaviour
     public List<Nest> preyNests = new List<Nest>();
     public List<Predator> predators = new List<Predator>();
     public List<Nest> predatorNests = new List<Nest>();
+    public List<GameObject> poop = new List<GameObject>();
     private void OnValidate() => EstablishSingleton();
     private void Awake() => EstablishSingleton();
 
@@ -16,17 +17,5 @@ public class BoidManager : MonoBehaviour
     {
         if (singleton != null && singleton != this) Destroy(this);
         else singleton = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

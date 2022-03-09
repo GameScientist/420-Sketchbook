@@ -33,12 +33,12 @@ public class Nest : MonoBehaviour
             if (predator)
             {
                 Instantiate(predatorPrefab, transform.position + new Vector3(Random.Range(-.4f, .4f), Random.Range(-.4f, .4f), Random.Range(-.4f, .4f)), transform.rotation, null);
-                timer = Random.Range(.1f, 60);
+                timer = Random.Range(1f, 60f);
             }
             else
             {
                 Instantiate(preyPrefab, transform.position + new Vector3(Random.Range(-.4f, .4f), Random.Range(-.4f, .4f), Random.Range(-.4f, .4f)), transform.rotation, null);
-                timer = Random.Range(.1f, 8);
+                timer = Random.Range(1f, 6f);
             }
         }
         if (Input.GetKeyDown(keyBind))
