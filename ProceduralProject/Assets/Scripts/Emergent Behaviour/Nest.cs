@@ -2,21 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Spawns fish. The type of fish spawned can be changed by the player.
+/// </summary>
 public class Nest : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject predatorPrefab;
-    [SerializeField]
-    private GameObject preyPrefab;
-    [SerializeField]
-    private Material predatorMaterial;
-    [SerializeField]
-    private Material preyMaterial;
-    public bool predator;
+    /// <summary>
+    /// The time left before another fish is spawned.
+    /// </summary>
     private float timer = 0;
+    /// <summary>
+    /// Has its nest lists adjusted.
+    /// </summary>
     private BoidManager manager;
+    /// <summary>
+    /// The prefabs used to spawn the fish.
+    /// </summary>
+    [SerializeField]
+    private GameObject predatorPrefab, preyPrefab;
+    /// <summary>
+    /// The material used on this nest.
+    /// </summary>
+    [SerializeField]
+    private Material predatorMaterial, preyMaterial;
+    /// <summary>
+    /// If this nest spawns a predator or a prey.
+    /// </summary>
+    public bool predator;
+    /// <summary>
+    /// The key bind required to toggle the nest.
+    /// </summary>
     public KeyCode keyBind;
-    //private void OnValidate() => Toggle();
 
     private void Start()
     {
@@ -28,20 +44,20 @@ public class Nest : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
-        if(timer <= 0)
+        if(timer <= 0)// When the timer runs out, a fish is spawned.
         {
-            if (predator)
+            if (predator)// A predator is spawned.
             {
                 Instantiate(predatorPrefab, transform.position + new Vector3(Random.Range(-.4f, .4f), Random.Range(-.4f, .4f), Random.Range(-.4f, .4f)), transform.rotation, null);
                 timer = Random.Range(1f, 60f);
             }
-            else
+            else// A prey is spawned.
             {
                 Instantiate(preyPrefab, transform.position + new Vector3(Random.Range(-.4f, .4f), Random.Range(-.4f, .4f), Random.Range(-.4f, .4f)), transform.rotation, null);
                 timer = Random.Range(1f, 6f);
             }
         }
-        if (Input.GetKeyDown(keyBind))
+        if (Input.GetKeyDown(keyBind))// Flip between predator and prey nest.
         {
             RemoveFromList();
             predator = !predator;
@@ -49,7 +65,10 @@ public class Nest : MonoBehaviour
         }
     }
 
-    public void Toggle()
+    /// <summary>
+    /// Switches between spawning predators and prey.
+    /// </summary>
+    private void Toggle()
     {
         if (predator)
         {
@@ -63,11 +82,11 @@ public class Nest : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        RemoveFromList();
-    }
+    private void OnDestroy() => RemoveFromList();
 
+    /// <summary>
+    /// Removes the specified type of fish from the boid manager's list.
+    /// </summary>
     private void RemoveFromList()
     {
         if (predator) manager.predatorNests.Remove(this);
