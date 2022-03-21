@@ -6,7 +6,8 @@ public static class Pathfinding
 {
     public class Node
     {
-        public Vector3 position;
+        public Vector3 pos;
+        public float moveCost = 1; // 
         public float x;
         public float y;
         public float G { get; private set; }
@@ -18,33 +19,43 @@ public static class Pathfinding
                 return G + H;
             }
         }
-        public float moveCost = 1; // 
         public List<Node> neighbors = new List<Node>();
 
-        private Node _parent;
-        public Node parent
+        public Node parent { get; private set; }
+        public void UpdateParentAndG(Node parent, float extraG = 0)
         {
-            get { return _parent; }
-            set
+            this.parent = parent;
+            if (parent != null)
             {
-                _parent = value;
-                if (_parent != null) G = _parent.G + moveCost;
-                else G = 0;
+                G = parent.G + moveCost + extraG;
+            }
+            else
+            {
+                G = extraG;
             }
         }
+        /// <summary>
+        /// Makes an educated guess as to how far we are from the end point.
+        /// </summary>
+        /// <param name="end"></param>
         public void DoHeuristic(Node end)
         {
-            Vector3 d = end.position - this.position;
+            Vector3 d = end.pos - this.pos;
             H = d.magnitude;
+
+            // manhatten heuristic:
+            //H = d.x + d.y + d.z;
         }
     }
 
     public static List<Node> Solve(Node start, Node end)
     {
-        List<Node> open = new List<Node>();
-        List<Node> closed = new List<Node>();
+        if (start == null) return new List<Node>();
 
-        start.parent = null;
+        List<Node> open = new List<Node>(); // all the nodes that have been discovered, but not "scanned"
+        List<Node> closed = new List<Node>(); // these nodes are "scanned"
+
+        start.UpdateParentAndG(null, 0);
         open.Add(start);
 
         // 1. travel from start to end
@@ -53,7 +64,7 @@ public static class Pathfinding
             // find node in OPEN list with SMALLEST F value
             float bestF = 0;
             Node current = null;
-            foreach(Node n in open)
+            foreach (Node n in open)
             {
                 if (n.F < bestF || current == null)
                 {
@@ -61,39 +72,50 @@ public static class Pathfinding
                     bestF = n.F;
                 }
             }
-
-            if(current == end)
+            // if this node is the end, stop looping
+            if (current == end)
             {
                 break;
             }
-
-            foreach(Node neighbor in current.neighbors)
+            bool isDone = false;
+            foreach (Node neighbor in current.neighbors)
             {
                 if (!closed.Contains(neighbor)) // node not in CLOSED
                 {
                     if (!open.Contains(neighbor)) // node not in OPEN:
                     {
                         open.Add(neighbor);
-                        neighbor.parent = current;
+                        float dis = (neighbor.pos - current.pos).magnitude;
+                        neighbor.UpdateParentAndG(current, dis); // set child's 'parent' & 'G'
+                        if (neighbor == end) isDone = true;
                         neighbor.DoHeuristic(end);
                     }
                     else // node already in OPEN:
                     {
-                        if (neighbor.G > current.G + neighbor.moveCost)
+                        float dis = (neighbor.pos - current.pos).magnitude;
+                        if (current.G + neighbor.moveCost + dis < neighbor.G)
                         {
                             // it's shorter to move to neighbor from current
-                            neighbor.parent = current;
+                            neighbor.UpdateParentAndG(current, dis);
                         }
                     }
                 }
             }
+            closed.Add(current);
+            open.Remove(current);
+            if (isDone) break;
         }
 
         // 2. travel from end to start, building path
         List<Node> path = new List<Node>();
+        for(Node temp = end; temp != null; temp = temp.parent)
+        {
+            path.Add(temp);
+        }
+
 
         // 3. reverse path
-
+        path.Reverse();
         return path;
     }
 }
