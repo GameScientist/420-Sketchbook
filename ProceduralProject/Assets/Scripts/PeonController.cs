@@ -42,7 +42,7 @@ public class PeonController : MonoBehaviour
         Vector3 target = pathToTarget[1].pos;
         target.y += 1;
         transform.position = Vector3.Lerp(transform.position, target, .05f);
-        float d = (pathToTarget[1].pos - transform.position).magnitude;
+        float d = (target - transform.position).magnitude;
         if (d < .25f) shouldCheckAgain = true;
     }
 

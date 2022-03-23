@@ -111,11 +111,11 @@ public class GridController : MonoBehaviour
         float w = 1;
         float h = 1;
 
-        pos.x += w/2;
-        pos.y += h/2;
+        pos.x += w / 2;
+        pos.y += h / 2;
 
-        int x = (int)(pos.x / w);
-        int y = (int)(pos.z / h);
+        int x = (int)Mathf.Round(pos.x / w);
+        int y = (int)Mathf.Round(pos.z / h);
 
         if (x < 0 || y < 0) return null;
         if (x >= nodes.GetLength(0) || y >= nodes.GetLength(1)) return null;
