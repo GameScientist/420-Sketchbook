@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
 public class GridController : MonoBehaviour
 {
     // A delegate is used within another function
     delegate Pathfinding.Node LookupDelegate(int x, int y);
 
-    private LineRenderer linePath;
+    public static GridController _singleton;
+    public static GridController singleton { get; private set; }
 
     public TerrainCube cubePrefab;
 
     private TerrainCube[,] cubes;
+    private Pathfinding.Node[,] nodes;
 
     public int size = 19;
 
@@ -22,37 +23,35 @@ public class GridController : MonoBehaviour
 
     private void Start()
     {
-        linePath = GetComponent<LineRenderer>();
+        if (singleton != null) // we already have a singleton...
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        singleton = this;
+        DontDestroyOnLoad(gameObject);
         MakeGrid();
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        MakeNodes();
+        if (this == singleton) singleton = null;
     }
+
+    private void Update() => MakeNodes();
 
     void MakeGrid()
     {
-
         cubes = new TerrainCube[size, size];
-
-        for (int x = 0; x < size; x++)
-        {
-            for (int y = 0; y < size; y++)
-            {
-                cubes[x, y] = Instantiate(cubePrefab, new Vector3(x, 0, y), Quaternion.identity);
-
-            }
-        }
+        for (int x = 0; x < size; x++) for (int y = 0; y < size; y++) cubes[x, y] = Instantiate(cubePrefab, new Vector3(x, 0, y), Quaternion.identity);
     }
 
     public void MakeNodes()
     {
-        Pathfinding.Node[,] nodes = new Pathfinding.Node[cubes.GetLength(0), cubes.GetLength(1)];
+        nodes = new Pathfinding.Node[cubes.GetLength(0), cubes.GetLength(1)];
 
-        for (int x = 0; x < cubes.GetLength(0); x++)
-        {
-            for (int y = 0; y < cubes.GetLength(1); y++)
+        for (int x = 0; x < cubes.GetLength(0); x++) for (int y = 0; y < cubes.GetLength(1); y++)
             {
                 Pathfinding.Node n = new Pathfinding.Node();
 
@@ -63,7 +62,6 @@ public class GridController : MonoBehaviour
 
                 nodes[x, y] = n;
             }
-        }
 
         // Anonymous function only exists within this function
         LookupDelegate lookup = (x, y) =>
@@ -76,9 +74,7 @@ public class GridController : MonoBehaviour
         };
 
         // Lookup each neighbor within the nodes
-        for (int x = 0; x < nodes.GetLength(0); x++)
-        {
-            for (int y = 0; y < nodes.GetLength(1); y++)
+        for (int x = 0; x < nodes.GetLength(0); x++) for (int y = 0; y < nodes.GetLength(1); y++)
             {
                 Pathfinding.Node n = nodes[x, y];
 
@@ -101,27 +97,22 @@ public class GridController : MonoBehaviour
                 if (neighbor7 != null) n.neighbors.Add(neighbor7);
                 if (neighbor8 != null) n.neighbors.Add(neighbor8);
             }
-        }
+        /*Pathfinding.Node start = Lookup(helperStart.position);
+        Pathfinding.Node end = Lookup(helperEnd.position);
 
-        Pathfinding.Node start = Lookup(helperStart.position, nodes);
-        Pathfinding.Node end = Lookup(helperEnd.position, nodes);
+        List<Pathfinding.Node> path = Pathfinding.Solve(start, end);*/
 
-        List<Pathfinding.Node> path = Pathfinding.Solve(start, end);
 
-        // Set up rendering the path for line renderer
-        Vector3[] positions = new Vector3[path.Count];
 
-        for (int i = 0; i < path.Count; i++)
-        {
-            positions[i] = path[i].pos + new Vector3(0, .5f, 0);
-        }
-        linePath.positionCount = positions.Length;
-        linePath.SetPositions(positions);
     }
-    public Pathfinding.Node Lookup(Vector3 pos, Pathfinding.Node[,] nodes)
+    public Pathfinding.Node Lookup(Vector3 pos)
     {
+        if (nodes == null) MakeNodes();
         float w = 1;
         float h = 1;
+
+        pos.x += w/2;
+        pos.y += h/2;
 
         int x = (int)(pos.x / w);
         int y = (int)(pos.z / h);
@@ -139,10 +130,6 @@ class GridControllerEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-
-        if (GUILayout.Button("Find a path"))
-        {
-            (target as GridController).MakeNodes();
-        }
+        if (GUILayout.Button("Find a path")) (target as GridController).MakeNodes();
     }
 }

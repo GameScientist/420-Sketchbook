@@ -35,9 +35,17 @@ public class TerrainCube : MonoBehaviour
     // Update is called once per frame
     void OnMouseDown()
     {
+        // changes this TerrainCube's state: (wall/slime/none)
+
         type++;
         if ((int)type > 2) type = 0;
+
+        // change this TerrainCube's artwork:
+
         UpdateArt();
+
+        // rebuild our array of nodes:
+        if (GridController.singleton) GridController.singleton.MakeNodes();
     }
 
     void UpdateArt()
