@@ -12,27 +12,15 @@ public static class Pathfinding
         public float y;
         public float G { get; private set; }
         public float H { get; private set; }
-        public float F
-        {
-            get
-            {
-                return G + H;
-            }
-        }
+        public float F => G + H;
         public List<Node> neighbors = new List<Node>();
 
         public Node parent { get; private set; }
         public void UpdateParentAndG(Node parent, float extraG = 0)
         {
             this.parent = parent;
-            if (parent != null)
-            {
-                G = parent.G + moveCost + extraG;
-            }
-            else
-            {
-                G = extraG;
-            }
+            if (parent != null) G = parent.G + moveCost + extraG;
+            else G = extraG;
         }
         /// <summary>
         /// Makes an educated guess as to how far we are from the end point.
@@ -73,14 +61,9 @@ public static class Pathfinding
                 }
             }
             // if this node is the end, stop looping
-            if (current == end)
-            {
-                break;
-            }
+            if (current == end) break;
             bool isDone = false;
-            foreach (Node neighbor in current.neighbors)
-            {
-                if (!closed.Contains(neighbor)) // node not in CLOSED
+            foreach (Node neighbor in current.neighbors) if (!closed.Contains(neighbor)) // node not in CLOSED
                 {
                     if (!open.Contains(neighbor)) // node not in OPEN:
                     {
@@ -100,7 +83,6 @@ public static class Pathfinding
                         }
                     }
                 }
-            }
             closed.Add(current);
             open.Remove(current);
             if (isDone) break;
@@ -108,10 +90,7 @@ public static class Pathfinding
 
         // 2. travel from end to start, building path
         List<Node> path = new List<Node>();
-        for(Node temp = end; temp != null; temp = temp.parent)
-        {
-            path.Add(temp);
-        }
+        for (Node temp = end; temp != null; temp = temp.parent) path.Add(temp);
 
 
         // 3. reverse path
