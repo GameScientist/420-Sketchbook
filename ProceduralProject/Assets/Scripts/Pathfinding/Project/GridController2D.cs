@@ -8,8 +8,9 @@ public class GridController2D : MonoBehaviour
     delegate Pathfinding.Node LookupDelegate(int x, int y);
     public static GridController2D _singleton;
     public static GridController2D singleton { get; private set; }
-    private GameObject[] tiles;
+    private Transform[,] tiles = new Transform[12, 7];
     Pathfinding.Node[,] nodes;
+    private Vector2Int[] floorTiles = { new Vector2Int(1, 1), new Vector2Int(1, 2) };
     // Start is called before the first frame update
     void Start()
     {
@@ -21,26 +22,26 @@ public class GridController2D : MonoBehaviour
 
         singleton = this;
         DontDestroyOnLoad(gameObject);
-        tiles = GetComponentsInChildren<GameObject>();
+        foreach (Transform tile in GetComponentsInChildren<Transform>()) if (tile != transform) tiles[(int)tile.localPosition.x, (int)tile.localPosition.y] = tile;
     }
 
     // Update is called once per frame
     void Update() => MakeNodes();
 
-    private void MakeNodes()
+    public void MakeNodes()
     {
         nodes = new Pathfinding.Node[12, 7];
-        foreach (GameObject tile in tiles)
-        {
-            Pathfinding.Node n = new Pathfinding.Node();
-            Vector3 pos = tile.transform.position;
+        for (int x = 0; x < tiles.GetLength(0); x++) for (int y = 0; y < tiles.GetLength(1); y++)
+            {
+                Pathfinding.Node n = new Pathfinding.Node();
+                Vector3 pos = new Vector3(x, y, 0);
 
-            n.pos = pos;
-            TerrainTile terrain = tile.GetComponent<TerrainTile>();
-            if (terrain == null) n.moveCost = 4;
-            else n.moveCost = terrain.floor ? 1 : 2;
-            nodes[(int)pos.x, (int)pos.y] = n;
-        }
+                n.pos = pos;
+                TerrainTile terrain = tiles[x, y].GetComponent<TerrainTile>();
+                if (terrain == null) n.moveCost = 4;
+                else n.moveCost = terrain.floor ? 1 : 2;
+                nodes[(int)pos.x, (int)pos.y] = n;
+            }
 
         LookupDelegate lookup = (x, y) =>
         {
@@ -84,5 +85,12 @@ public class GridController2D : MonoBehaviour
         if (x >= nodes.GetLength(0) || y >= nodes.GetLength(1)) return null;
 
         return nodes[x, y];
+    }
+
+    public void ChangeFloors(Vector2Int floor)
+    {
+        tiles[floorTiles[0].x, floorTiles[0].y].GetComponent<TerrainTile>().Toggle();
+        floorTiles[0] = floorTiles[1];
+        floorTiles[1] = floor;
     }
 }
