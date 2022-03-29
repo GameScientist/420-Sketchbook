@@ -26,10 +26,19 @@ public class TerrainTile : MonoBehaviour
         UpdateTile();
     }
 
-    private void OnMouseDown()
+    public void Toggle()
     {
         floor = !floor;
         UpdateTile();
-        if (GridController.singleton) GridController.singleton.MakeNodes();
+    }
+
+    private void OnMouseDown()
+    {
+        if (floor) return;
+        Toggle();
+        GridController2D grid = GridController2D.singleton;
+        if (!grid) return;
+        grid.ChangeFloors(new Vector2Int((int)transform.localPosition.x, (int)transform.localPosition.y));
+        grid.MakeNodes();
     }
 }
