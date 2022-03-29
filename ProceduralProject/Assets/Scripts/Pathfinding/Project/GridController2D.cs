@@ -22,7 +22,7 @@ public class GridController2D : MonoBehaviour
 
         singleton = this;
         DontDestroyOnLoad(gameObject);
-        foreach (Transform tile in GetComponentsInChildren<Transform>()) if (tile != transform) tiles[(int)tile.localPosition.x, (int)tile.localPosition.y] = tile;
+        foreach (Transform tile in GetComponentsInChildren<Transform>()) if (tile != transform && tile.GetComponent<PathfinderController>()==null) tiles[(int)tile.position.x, (int)tile.position.y] = tile;
     }
 
     // Update is called once per frame
@@ -38,8 +38,8 @@ public class GridController2D : MonoBehaviour
 
                 n.pos = pos;
                 TerrainTile terrain = tiles[x, y].GetComponent<TerrainTile>();
-                if (terrain == null) n.moveCost = 4;
-                else n.moveCost = terrain.floor ? 1 : 2;
+                if (terrain == null) n.moveCost = 144;
+                else n.moveCost = terrain.floor ? 1 : 12;
                 nodes[(int)pos.x, (int)pos.y] = n;
             }
 
@@ -75,11 +75,11 @@ public class GridController2D : MonoBehaviour
         float w = 1;
         float h = 1;
 
-        pos.x += w / 2;
-        pos.y += h / 2;
-
+        //pos.x += w / 2;
+        //pos.y += h / 2;
+        print(pos);
         int x = (int)Mathf.Round(pos.x / w);
-        int y = (int)Mathf.Round(pos.z / h);
+        int y = (int)Mathf.Round(pos.y / h);
 
         if (x < 0 || y < 0) return null;
         if (x >= nodes.GetLength(0) || y >= nodes.GetLength(1)) return null;
@@ -89,6 +89,7 @@ public class GridController2D : MonoBehaviour
 
     public void ChangeFloors(Vector2Int floor)
     {
+        print(tiles[floorTiles[0].x, floorTiles[0].y]);
         tiles[floorTiles[0].x, floorTiles[0].y].GetComponent<TerrainTile>().Toggle();
         floorTiles[0] = floorTiles[1];
         floorTiles[1] = floor;
