@@ -10,10 +10,12 @@ public class PathfinderController : MonoBehaviour
     [SerializeField]
     private Transform waypoint;
     private LineRenderer line;
+    private Rigidbody2D body;
     // Start is called before the first frame update
     void Start()
     {
         line = GetComponent<LineRenderer>();
+        body = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -36,7 +38,6 @@ public class PathfinderController : MonoBehaviour
         {
             Pathfinding.Node start = GridController2D.singleton.Lookup(transform.position);
             Pathfinding.Node end = GridController2D.singleton.Lookup(waypoint.position);
-            print(start.pos);
             if (start == null || end == null || start == end)
             {
                 pathToWaypoint.Clear();
@@ -57,8 +58,11 @@ public class PathfinderController : MonoBehaviour
     private void MoveAlongPath()
     {
         Vector3 destination = pathToWaypoint[1].pos;
-        transform.position = Vector3.Lerp(transform.position, destination, .01f);
-        float d = (destination - transform.position).magnitude;
+        //transform.position = Vector3.Lerp(transform.position, destination, .01f);
+        Vector2 direction = destination - transform.position;
+        body.velocity = Vector3.Lerp(body.velocity, direction.normalized * 2, .02f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90, Vector3.forward), .02f);
+        float d = direction.magnitude;
         if (d < .25f) check = true;
     }
 }
