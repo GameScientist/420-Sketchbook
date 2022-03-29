@@ -10,7 +10,11 @@ public class GridController2D : MonoBehaviour
     public static GridController2D singleton { get; private set; }
     private Transform[,] tiles = new Transform[12, 7];
     Pathfinding.Node[,] nodes;
-    private Vector2Int[] floorTiles = { new Vector2Int(1, 1), new Vector2Int(1, 2) };
+    private Vector2Int[] floorTiles = { new Vector2Int(9, 5), new Vector2Int(1, 1) };
+    [SerializeField]
+    private GameObject tutorial;
+    [SerializeField]
+    private PathfinderController player;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +25,7 @@ public class GridController2D : MonoBehaviour
         }
 
         singleton = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         foreach (Transform tile in GetComponentsInChildren<Transform>()) if (tile != transform && tile.GetComponent<PathfinderController>()==null) tiles[(int)tile.position.x, (int)tile.position.y] = tile;
     }
 
@@ -89,7 +93,12 @@ public class GridController2D : MonoBehaviour
 
     public void ChangeFloors(Vector2Int floor)
     {
-        print(tiles[floorTiles[0].x, floorTiles[0].y]);
+        if (tutorial)
+        {
+            Destroy(tutorial);
+            player.moving = true;
+            player.GetComponent<Animator>().enabled = true;
+        }
         tiles[floorTiles[0].x, floorTiles[0].y].GetComponent<TerrainTile>().Toggle();
         floorTiles[0] = floorTiles[1];
         floorTiles[1] = floor;

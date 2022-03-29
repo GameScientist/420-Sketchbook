@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TerrainTile : MonoBehaviour
 {
@@ -40,5 +41,10 @@ public class TerrainTile : MonoBehaviour
         if (!grid) return;
         grid.ChangeFloors(new Vector2Int((int)transform.localPosition.x, (int)transform.localPosition.y));
         grid.MakeNodes();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<PathfinderController>() != null) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

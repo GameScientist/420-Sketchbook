@@ -291,7 +291,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55499443}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 74c5b4a0c3273c048bcc02d0243e47b6, type: 2}
   m_CullingMode: 0
@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoint: {fileID: 194345705}
+  moving: 0
 --- !u!50 &55499449
 Rigidbody2D:
   serializedVersion: 4
@@ -909,6 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorial: {fileID: 1028683232}
+  player: {fileID: 55499448}
 --- !u!1 &125262363
 GameObject:
   m_ObjectHideFlags: 0

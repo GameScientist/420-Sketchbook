@@ -7,10 +7,10 @@ public class PathfinderController : MonoBehaviour
     private bool check;
     private float checkTimer = 0;
     private List<Pathfinding.Node> pathToWaypoint = new List<Pathfinding.Node>();
-    [SerializeField]
-    private Transform waypoint;
+    public Transform waypoint;
     private LineRenderer line;
     private Rigidbody2D body;
+    public bool moving;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +21,7 @@ public class PathfinderController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!moving) return;
         checkTimer -= Time.deltaTime;
         if (checkTimer <= 0)
         {
@@ -60,7 +61,7 @@ public class PathfinderController : MonoBehaviour
         Vector3 destination = pathToWaypoint[1].pos;
         //transform.position = Vector3.Lerp(transform.position, destination, .01f);
         Vector2 direction = destination - transform.position;
-        body.velocity = Vector3.Lerp(body.velocity, direction.normalized * 2, .02f);
+        body.velocity = Vector3.Lerp(body.velocity, direction.normalized, .02f);
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90, Vector3.forward), .02f);
         float d = direction.magnitude;
         if (d < .25f) check = true;
