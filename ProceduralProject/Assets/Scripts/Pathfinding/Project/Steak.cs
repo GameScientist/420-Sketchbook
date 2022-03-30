@@ -1,9 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Sets a new waypoint for the player upon collision.
+/// </summary>
 public class Steak : MonoBehaviour
 {
+    /// <summary>
+    /// The next waypoint of the player.
+    /// </summary>
     public Transform waypoint;
     private void OnTriggerEnter2D(Collider2D collision)
     {

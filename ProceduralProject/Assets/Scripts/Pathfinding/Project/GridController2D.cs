@@ -2,17 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Monitors the status of each tile within the scene.
+/// </summary>
 public class GridController2D : MonoBehaviour
 {
-    // A delegate is used within another function
+    /// <summary>
+    /// Creates a grid of nodes for the character to travel between to reach its destination.
+    /// </summary>
+    /// <param name="x">The amount of columns within the grid of nodes.</param>
+    /// <param name="y">The amount of rows within the grid of nodes.</param>
+    /// <returns></returns>
     delegate Pathfinding.Node LookupDelegate(int x, int y);
-    public static GridController2D _singleton;
-    public static GridController2D singleton { get; private set; }
+    /// <summary>
+    /// The grid of tiles the player character travels between.
+    /// </summary>
     private Transform[,] tiles = new Transform[12, 7];
-    Pathfinding.Node[,] nodes;
-    //private Vector2Int[] floorTiles = { new Vector2Int(9, 5), new Vector2Int(1, 1) };
+    /// <summary>
+    /// The floor placed by the player with the left mouse button.
+    /// </summary>
     private Vector2Int leftFloor = new Vector2Int(1, 1);
+    /// <summary>
+    /// The floor placed by the player with the right mouse button.
+    /// </summary>
     private Vector2Int rightFloor = new Vector2Int(9, 5);
+    /// <summary>
+    /// Establishes this object as the only grid controller in the scene.
+    /// </summary>
+    public static GridController2D singleton { get; private set; }
+    /// <summary>
+    /// Used to help determine the best path to take to the end of the path.
+    /// </summary>
+    Pathfinding.Node[,] nodes;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,17 +44,19 @@ public class GridController2D : MonoBehaviour
         }
 
         singleton = this;
-        //DontDestroyOnLoad(gameObject);
         foreach (Transform tile in GetComponentsInChildren<Transform>()) if (tile != transform && tile.GetComponent<PathfinderController>()==null) tiles[(int)tile.position.x, (int)tile.position.y] = tile;
     }
 
     // Update is called once per frame
     void Update() => MakeNodes();
 
+    /// <summary>
+    /// Creates a grid of nodes based on the tiles within the scene.
+    /// </summary>
     public void MakeNodes()
     {
         nodes = new Pathfinding.Node[12, 7];
-        for (int x = 0; x < tiles.GetLength(0); x++) for (int y = 0; y < tiles.GetLength(1); y++)
+        for (int x = 0; x < tiles.GetLength(0); x++) for (int y = 0; y < tiles.GetLength(1); y++) // Create a node for each tile and determine its move cost.
             {
                 Pathfinding.Node n = new Pathfinding.Node();
                 Vector3 pos = new Vector3(x, y, 0);
@@ -71,15 +94,16 @@ public class GridController2D : MonoBehaviour
             }
     }
 
+    /// <summary>
+    /// Find the best path to take to a destination.
+    /// </summary>
+    /// <param name="pos">The position of the destination.</param>
+    /// <returns>The best path to take to a destination.</returns>
     public Pathfinding.Node Lookup(Vector3 pos)
     {
         if (nodes == null) MakeNodes();
         float w = 1;
         float h = 1;
-
-        //pos.x += w / 2;
-        //pos.y += h / 2;
-        print(pos);
         int x = (int)Mathf.Round(pos.x / w);
         int y = (int)Mathf.Round(pos.y / h);
 
@@ -89,12 +113,20 @@ public class GridController2D : MonoBehaviour
         return nodes[x, y];
     }
 
+    /// <summary>
+    /// Changes the position of the left floor.
+    /// </summary>
+    /// <param name="floor">The new position of the left floor.</param>
     public void ChangeLeftFloor(Vector2Int floor)
     {
         tiles[leftFloor.x, leftFloor.y].GetComponent<TerrainTile>().Toggle();
         leftFloor = floor;
     }
 
+    /// <summary>
+    /// Changes the position of the right floor.
+    /// </summary>
+    /// <param name="floor">The new position of the right floor.</param>
     public void ChangeRightFloor(Vector2Int floor)
     {
         tiles[rightFloor.x, rightFloor.y].GetComponent<TerrainTile>().Toggle();

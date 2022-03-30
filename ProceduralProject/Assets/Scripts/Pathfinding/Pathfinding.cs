@@ -1,41 +1,45 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Used to find the most desireable path to take towards a destination.
+/// </summary>
 public static class Pathfinding
 {
     public class Node
     {
-        public Vector3 pos;
-        public float moveCost = 1; // 
-        public float x;
-        public float y;
         public float G { get; private set; }
         public float H { get; private set; }
         public float F => G + H;
+        /// <summary>
+        /// Measures the desireability of a path to be taken.
+        /// The higher the number, the less desireable the path.
+        /// </summary>
+        public float moveCost = 1;
+        public float x;
+        public float y;
         public List<Node> neighbors = new List<Node>();
-
-        public Node parent { get; private set; }
+        public Node Parent { get; private set; }
+        public Vector3 pos;
         public void UpdateParentAndG(Node parent, float extraG = 0)
         {
-            this.parent = parent;
+            Parent = parent;
             if (parent != null) G = parent.G + moveCost + extraG;
             else G = extraG;
         }
         /// <summary>
         /// Makes an educated guess as to how far we are from the end point.
         /// </summary>
-        /// <param name="end"></param>
-        public void DoHeuristic(Node end)
-        {
-            Vector3 d = end.pos - this.pos;
-            H = d.magnitude;
-
-            // manhatten heuristic:
-            //H = d.x + d.y + d.z;
-        }
+        /// <param name="end">The end point.</param>
+        public void DoHeuristic(Node end) => H = (end.pos - pos).magnitude;
     }
 
+    /// <summary>
+    /// Finds the most desireable path to take towards a destination.
+    /// </summary>
+    /// <param name="start">The beginning of the path.</param>
+    /// <param name="end">The end of the path.</param>
+    /// <returns>The most desireable path.</returns>
     public static List<Node> Solve(Node start, Node end)
     {
         if (start == null) return new List<Node>();
@@ -90,7 +94,7 @@ public static class Pathfinding
 
         // 2. travel from end to start, building path
         List<Node> path = new List<Node>();
-        for (Node temp = end; temp != null; temp = temp.parent) path.Add(temp);
+        for (Node temp = end; temp != null; temp = temp.Parent) path.Add(temp);
 
 
         // 3. reverse path

@@ -1,30 +1,59 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Follows a path to reach waypoints.
+/// </summary>
 public class PathfinderController : MonoBehaviour
 {
+    /// <summary>
+    /// Signals that the controller can search for a new path.
+    /// </summary>
     private bool check;
+    /// <summary>
+    /// How long before the controller automatically checks for a new path.
+    /// </summary>
     private float checkTimer = 0;
-    private List<Pathfinding.Node> pathToWaypoint = new List<Pathfinding.Node>();
-    public Transform waypoint;
-    private LineRenderer line;
-    private Rigidbody2D body;
-    public bool moving;
+    /// <summary>
+    /// The tutorial explaining how to place a right floor.
+    /// </summary>
     [SerializeField]
     private GameObject rightTutorial;
+    /// <summary>
+    /// The tutorial explaining how to place a left floor.
+    /// </summary>
     [SerializeField]
     private GameObject leftTutorial;
+    /// <summary>
+    /// A message that is shown when the player character reaches the goal.
+    /// </summary>
+    [SerializeField]
+    private GameObject victoryScreen;
+    /// <summary>
+    /// The currently selected path to a waypoint.
+    /// </summary>
+    private List<Pathfinding.Node> pathToWaypoint = new List<Pathfinding.Node>();
+    /// <summary>
+    /// Moves the player character.
+    /// </summary>
+    private Rigidbody2D body;
+
+    /// <summary>
+    /// Signals that the player controller can start moving towards its destination.
+    /// </summary>
+    public bool moving;
+    /// <summary>
+    /// The current point the player is attempting to move to.
+    /// </summary>
+    public Transform waypoint;
+
     // Start is called before the first frame update
-    void Start()
-    {
-        line = GetComponent<LineRenderer>();
-        body = GetComponent<Rigidbody2D>();
-    }
+    void Start() => body = GetComponent<Rigidbody2D>();
 
     // Update is called once per frame
     void Update()
     {
+        // Tutorials and movement are enabled by input.
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) moving = true;
         if (Input.GetMouseButtonDown(1) && rightTutorial.activeInHierarchy)
         {
@@ -33,16 +62,26 @@ public class PathfinderController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && leftTutorial.activeInHierarchy) leftTutorial.SetActive(false);
         if (!moving) return;
+
+        if(Vector3.Distance(transform.position, new Vector3(10, 5, 0)) < .1f)
+        {
+            victoryScreen.SetActive(true);
+            Destroy(gameObject);
+        }
+
         checkTimer -= Time.deltaTime;
-        if (checkTimer <= 0)
+        if (checkTimer <= 0)// Reset check timer.
         {
             check = true;
-            checkTimer = 1;
+            checkTimer = .25f;
         }
         if (check) FindPath();
         if (pathToWaypoint != null && pathToWaypoint.Count >= 2) MoveAlongPath();
     }
 
+    /// <summary>
+    /// Creates a new path for the player character to take towards the current waypoint.
+    /// </summary>
     private void FindPath()
     {
         check = false;
@@ -57,21 +96,15 @@ public class PathfinderController : MonoBehaviour
             }
 
             pathToWaypoint = Pathfinding.Solve(start, end);
-
-            // Set up rendering the path for line renderer
-            Vector3[] positions = new Vector3[pathToWaypoint.Count];
-
-            for (int i = 0; i < pathToWaypoint.Count; i++) positions[i] = pathToWaypoint[i].pos - new Vector3(0, 0, .5f);
-            line.positionCount = positions.Length;
-            line.SetPositions(positions);
         }
     }
 
+    /// <summary>
+    /// Moves the player character in the direction of the path.
+    /// </summary>
     private void MoveAlongPath()
     {
-        Vector3 destination = pathToWaypoint[1].pos;
-        //transform.position = Vector3.Lerp(transform.position, destination, .01f);
-        Vector2 direction = destination - transform.position;
+        Vector2 direction = pathToWaypoint[1].pos - transform.position;
         body.velocity = Vector3.Lerp(body.velocity, direction.normalized, .02f);
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90, Vector3.forward), .02f);
         float d = direction.magnitude;
