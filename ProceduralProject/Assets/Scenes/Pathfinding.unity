@@ -181,6 +181,90 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &18950123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 18950125}
+  - component: {fileID: 18950124}
+  m_Layer: 0
+  m_Name: TutorialRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &18950124
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18950123}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: eb9fc2e7cd64f87469a8055ecffafbc4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &18950125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18950123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5, y: 2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &27107805
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +468,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoint: {fileID: 194345705}
   moving: 0
+  rightTutorial: {fileID: 18950123}
+  leftTutorial: {fileID: 1071527097}
 --- !u!50 &55499449
 Rigidbody2D:
   serializedVersion: 4
@@ -640,7 +726,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &69812269
 MonoBehaviour:
@@ -727,6 +813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &83130867
 SpriteRenderer:
@@ -909,8 +997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ed70c9c707bde499d3dcd762238ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorial: {fileID: 1028683232}
-  player: {fileID: 55499448}
 --- !u!1 &125262363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,6 +1309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &174648577
 SpriteRenderer:
@@ -1466,7 +1554,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &194345706
 MonoBehaviour:
@@ -1793,6 +1881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &272595808
 SpriteRenderer:
@@ -1918,6 +2008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &273072324
 SpriteRenderer:
@@ -2203,6 +2295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &320526764
 SpriteRenderer:
@@ -2328,6 +2422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &363629677
 SpriteRenderer:
@@ -2453,6 +2549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &372664519
 SpriteRenderer:
@@ -2738,6 +2836,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 1
 --- !u!212 &456216145
 SpriteRenderer:
@@ -2780,7 +2880,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 338f9d0d362008e4e9794a2828d9159b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2943,6 +3043,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &480669441
 SpriteRenderer:
@@ -3068,6 +3170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &487808152
 SpriteRenderer:
@@ -3273,6 +3377,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &595299193
 SpriteRenderer:
@@ -3478,6 +3584,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &637775613
 SpriteRenderer:
@@ -3683,6 +3791,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &650859460
 SpriteRenderer:
@@ -3888,6 +3998,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &911863195
 SpriteRenderer:
@@ -4093,6 +4205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 1
 --- !u!212 &1015602289
 SpriteRenderer:
@@ -4135,7 +4249,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 338f9d0d362008e4e9794a2828d9159b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4226,90 +4340,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &1028683232
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1028683234}
-  - component: {fileID: 1028683233}
-  m_Layer: 0
-  m_Name: ClickArrow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!212 &1028683233
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028683232}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: d6d9c718eb18e874bb20dd32bbdd1a44, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &1028683234
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028683232}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 2.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1040122756
 GameObject:
   m_ObjectHideFlags: 0
@@ -4390,6 +4420,90 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1071527097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1071527099}
+  - component: {fileID: 1071527098}
+  m_Layer: 0
+  m_Name: TutorialLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &1071527098
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071527097}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 28053580af6b08c4eaaf72969865fb85, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1071527099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071527097}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5, y: 3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1114656049
 GameObject:
   m_ObjectHideFlags: 0
@@ -4782,6 +4896,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1301614373
 SpriteRenderer:
@@ -4907,6 +5023,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1346411978
 SpriteRenderer:
@@ -5032,6 +5150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1406471244
 SpriteRenderer:
@@ -5317,6 +5437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1439993085
 SpriteRenderer:
@@ -5442,6 +5564,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1460633598
 SpriteRenderer:
@@ -5647,6 +5771,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1475691159
 SpriteRenderer:
@@ -5979,6 +6105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1516447352
 SpriteRenderer:
@@ -6264,6 +6392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1586689096
 SpriteRenderer:
@@ -6389,6 +6519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1591263286
 SpriteRenderer:
@@ -6514,6 +6646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1620014211
 SpriteRenderer:
@@ -6639,6 +6773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1635622634
 SpriteRenderer:
@@ -6844,6 +6980,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1668906563
 SpriteRenderer:
@@ -7049,6 +7187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1686731068
 SpriteRenderer:
@@ -7932,7 +8072,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1783812596
 MonoBehaviour:
@@ -8099,6 +8239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1815764367
 SpriteRenderer:
@@ -8304,6 +8446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1874673929
 SpriteRenderer:
@@ -8509,6 +8653,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &1983870954
 SpriteRenderer:
@@ -8634,6 +8780,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &2019596667
 SpriteRenderer:
@@ -8999,6 +9147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &2083513728
 SpriteRenderer:
@@ -9208,6 +9358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &2109217207
 SpriteRenderer:
@@ -9413,6 +9565,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34834afa2fbb34d8ce8e22bcffb234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftSprite: {fileID: 21300000, guid: a064930c9edf4474daae40b0266b6b8c, type: 3}
+  rightSprite: {fileID: 21300000, guid: c49fb490a45a2a446b6370a697c7c10f, type: 3}
   floor: 0
 --- !u!212 &2134824286
 SpriteRenderer:

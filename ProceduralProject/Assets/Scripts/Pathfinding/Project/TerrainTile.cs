@@ -7,6 +7,10 @@ public class TerrainTile : MonoBehaviour
 {
     private BoxCollider2D box;
     private SpriteRenderer sprite;
+    [SerializeField]
+    private Sprite leftSprite;
+    [SerializeField]
+    private Sprite rightSprite;
     public bool floor;
 
     private void OnValidate() => SetUpTile();
@@ -33,13 +37,23 @@ public class TerrainTile : MonoBehaviour
         UpdateTile();
     }
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
-        if (floor) return;
+        if (floor || (!Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1))) return;
+        print("Click");
         Toggle();
         GridController2D grid = GridController2D.singleton;
         if (!grid) return;
-        grid.ChangeFloors(new Vector2Int((int)transform.localPosition.x, (int)transform.localPosition.y));
+        if (Input.GetMouseButtonDown(0))
+        {
+            sprite.sprite = leftSprite;
+            grid.ChangeLeftFloor(new Vector2Int((int)transform.localPosition.x, (int)transform.localPosition.y));
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            sprite.sprite = rightSprite;
+            grid.ChangeRightFloor(new Vector2Int((int)transform.localPosition.x, (int)transform.localPosition.y));
+        }
         grid.MakeNodes();
     }
 

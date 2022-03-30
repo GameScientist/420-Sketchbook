@@ -11,6 +11,10 @@ public class PathfinderController : MonoBehaviour
     private LineRenderer line;
     private Rigidbody2D body;
     public bool moving;
+    [SerializeField]
+    private GameObject rightTutorial;
+    [SerializeField]
+    private GameObject leftTutorial;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +25,13 @@ public class PathfinderController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) moving = true;
+        if (Input.GetMouseButtonDown(1) && rightTutorial.activeInHierarchy)
+        {
+            rightTutorial.SetActive(false);
+            leftTutorial.SetActive(true);
+        }
+        if (Input.GetMouseButtonDown(0) && leftTutorial.activeInHierarchy) leftTutorial.SetActive(false);
         if (!moving) return;
         checkTimer -= Time.deltaTime;
         if (checkTimer <= 0)
