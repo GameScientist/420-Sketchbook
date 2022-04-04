@@ -63,7 +63,7 @@ public class PathfinderController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && leftTutorial.activeInHierarchy) leftTutorial.SetActive(false);
         if (!moving) return;
 
-        if(Vector3.Distance(transform.position, new Vector3(10, 5, 0)) < .1f)
+        if(Vector3.Distance(transform.position, new Vector3(10, 5, 0)) < .5f)
         {
             victoryScreen.SetActive(true);
             Destroy(gameObject);
