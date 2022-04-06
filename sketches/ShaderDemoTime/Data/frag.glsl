@@ -8,6 +8,8 @@ uniform vec2 texOffset; // size of a "pixel"
 varying vec4 vertTexCoord; // uv value at this pixel
 varying vec4 vertColor; // vertex color at this pixel
 
+uniform float time; // time in seconds?
+
 // runs once per pixel:
 void main() {
     float ratio = texOffset.x / texOffset.y;
@@ -17,8 +19,8 @@ void main() {
     float mag = length(uv); // dis from (0,0)
     float rad = atan(uv.y, uv.x); // angle from (0,0)
 
-    mag += .01;
-    rad += .01;
+    //mag -= .01 * sin(time);
+    rad += .01 * sin(time);
 
     uv.x = mag * cos(rad);
     uv.y = mag * sin(rad);
