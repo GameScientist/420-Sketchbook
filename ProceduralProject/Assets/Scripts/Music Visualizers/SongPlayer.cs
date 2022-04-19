@@ -24,10 +24,7 @@ public class SongPlayer : MonoBehaviour
         currentTrack = n;
     }
 
-    public void PlayTrackRandom()
-    {
-        PlayTrack(Random.Range(0, playlist.Length));
-    }
+    public void PlayTrackRandom() => PlayTrack(Random.Range(0, playlist.Length));
 
     public void PlayTrackNext()
     {
@@ -40,10 +37,7 @@ public class SongPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!player.isPlaying)
-        {
-            PlayTrackNext();
-        }
+        if (!player.isPlaying) PlayTrackNext();
     }
 }
 
