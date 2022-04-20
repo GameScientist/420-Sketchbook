@@ -11,14 +11,15 @@ public class DanceFloor : MonoBehaviour
     private Material lit;
     private AudioSource player;
     private int numBands = 512;
-    private Light[] lights;
+    private Light light;
     private float hue = 0;
+    private LineRenderer line;
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<AudioSource>();
         panels = GetComponentsInChildren<Panel>();
-        lights = GetComponentsInChildren<Light>();
+        light = GetComponentInChildren<Light>();
     }
 
     // Update is called once per frame
@@ -37,7 +38,7 @@ public class DanceFloor : MonoBehaviour
         hue += avgAmp * Time.deltaTime;
         if (hue >= 1) hue -= 1;
         Color color = Color.HSVToRGB(hue, 1, 1);
-        //foreach (Light light in lights) light.color = color;
+        light.color = color;
 
         int samples = 128;
         float[] data = new float[samples];
@@ -47,6 +48,6 @@ public class DanceFloor : MonoBehaviour
             if (data[i]>0.5f) panels[i].brightness = 1;
             panels[i].color = color;
         }
-
+        light.spotAngle = avgAmp*100;
     }
 }

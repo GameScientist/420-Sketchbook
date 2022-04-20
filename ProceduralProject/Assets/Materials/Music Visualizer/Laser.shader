@@ -1,12 +1,11 @@
-Shader "Custom/Panel"
+Shader "Custom/Laser"
 {
     Properties
     {
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
-        _Glossiness("Smoothness", Range(0,1)) = 0.5
-        _Metallic("Metallic", Range(0,1)) = 0.0
-            _Emission("Emission", Range(0, 1)) = 0
+        _Glossiness ("Smoothness", Range(0,1)) = 0.5
+        _Metallic ("Metallic", Range(0,1)) = 0.0
     }
     SubShader
     {
@@ -30,7 +29,6 @@ Shader "Custom/Panel"
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
-        float _Emission;
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -41,6 +39,7 @@ Shader "Custom/Panel"
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
+            IN.uv_MainTex.x += _Time.y;
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
             o.Albedo = c.rgb;
@@ -48,7 +47,7 @@ Shader "Custom/Panel"
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
-            o.Emission = _Emission * _Color / 2;
+            o.Emission = c.rgb;
         }
         ENDCG
     }

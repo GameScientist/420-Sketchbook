@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SimpleSurf
-  m_Shader: {fileID: 4800000, guid: c6f2f2bba8f52f84a96379c842eeebfe, type: 3}
+  m_Shader: {fileID: 4800000, guid: b3ffb571d53f7fe488d531f72650c6e2, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
