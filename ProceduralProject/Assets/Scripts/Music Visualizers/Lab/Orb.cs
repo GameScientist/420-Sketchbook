@@ -30,6 +30,6 @@ public class Orb : MonoBehaviour
 
         transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, .01f);
 
-        body.AddForce(dirToViz * 10 * Time.deltaTime, ForceMode.Force);
+        body.AddForce(dirToViz * 10000 * Time.deltaTime, ForceMode.Force);
     }
 }
