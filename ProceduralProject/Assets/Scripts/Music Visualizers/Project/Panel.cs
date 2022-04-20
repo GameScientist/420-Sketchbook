@@ -6,6 +6,7 @@ public class Panel : MonoBehaviour
 {
     public float brightness = 0;
     public float hue = 0;
+    public Color color = Color.black;
     private MeshRenderer mesh;
     // Start is called before the first frame update
     void Start()
@@ -16,8 +17,7 @@ public class Panel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hue >= 1) hue = 0;
-        mesh.material.SetColor("_Color", Color.HSVToRGB(hue, 1, 1));
+        mesh.material.SetColor("_Color", color);
         if (brightness > 0)
         {
             mesh.material.SetFloat("_Emission", brightness);
