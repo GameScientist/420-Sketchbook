@@ -14,6 +14,9 @@ public class DanceFloor : MonoBehaviour
     private Light light;
     private float hue = 0;
     private LineRenderer line;
+    [SerializeField]
+    private MeshRenderer[] dancers;
+    private float flipTimer = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,7 @@ public class DanceFloor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        flipTimer -= Time.deltaTime;
         float[] bands = new float[numBands];
         player.GetSpectrumData(bands, 0, FFTWindow.BlackmanHarris);
 
@@ -38,13 +42,25 @@ public class DanceFloor : MonoBehaviour
         hue += avgAmp * Time.deltaTime;
         if (hue >= 1) hue -= 1;
 
-        int samples = 128;
-        float[] data = new float[samples];
-        player.GetOutputData(data, 0);
+        int panelSamples = 128;
+        int dancerSamples = 8;
+        float[] panelData = new float[panelSamples];
+        float[] dancerData = new float[dancerSamples];
+        player.GetOutputData(panelData, 0);
         for (int i = 0; i < panels.Length; i++)
         {
-            if (data[i] > 0.5f) panels[i].brightness = 1;
+            if (panelData[i] > 0.5f) panels[i].brightness = 1;
             panels[i].color = Color.HSVToRGB(hue, 1, 1);
+        }
+        player.GetOutputData(dancerData, 0);
+        for(int i = 0; i<dancers.Length; i++)
+        {
+            if (panelData[i] > 0.3f && flipTimer <= 0)
+            {
+                flipTimer = 0.25f;
+                if (dancers[i].material.GetFloat("_Flip") == 0) dancers[i].material.SetFloat("_Flip", 1);
+                else dancers[i].material.SetFloat("_Flip", 0);
+            }
         }
         light.spotAngle = avgAmp * 100;
         float lightHue = hue + 0.5f;

@@ -10958,12 +10958,12 @@ GameObject:
   - component: {fileID: 1465169824}
   - component: {fileID: 1465169823}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Dancer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &1465169823
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10998,7 +10998,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2aef092ebba6a414c9e3181913a1ac05, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11036,7 +11036,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465169822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12264,6 +12264,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlit: {fileID: 2100000, guid: f9622d7dfd84ccd488912f469ae3f39a, type: 2}
   lit: {fileID: 2100000, guid: 753fb9d5f92c133499ed61f936d445da, type: 2}
+  dancers:
+  - {fileID: 1465169824}
 --- !u!1 &1582710959
 GameObject:
   m_ObjectHideFlags: 0
