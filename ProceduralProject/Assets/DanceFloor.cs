@@ -29,7 +29,7 @@ public class DanceFloor : MonoBehaviour
         player.GetSpectrumData(bands, 0, FFTWindow.BlackmanHarris);
 
         float avgAmp = 0;
-        for(int i = 0; i<panels.Length; i++)
+        for (int i = 0; i < panels.Length; i++)
         {
             avgAmp += bands[i];
         }
@@ -37,17 +37,18 @@ public class DanceFloor : MonoBehaviour
         avgAmp *= 100;
         hue += avgAmp * Time.deltaTime;
         if (hue >= 1) hue -= 1;
-        Color color = Color.HSVToRGB(hue, 1, 1);
-        light.color = color;
 
         int samples = 128;
         float[] data = new float[samples];
         player.GetOutputData(data, 0);
-        for (int i=0; i<panels.Length; i++)
+        for (int i = 0; i < panels.Length; i++)
         {
-            if (data[i]>0.5f) panels[i].brightness = 1;
-            panels[i].color = color;
+            if (data[i] > 0.5f) panels[i].brightness = 1;
+            panels[i].color = Color.HSVToRGB(hue, 1, 1);
         }
-        light.spotAngle = avgAmp*100;
+        light.spotAngle = avgAmp * 100;
+        float lightHue = hue + 0.5f;
+        if (lightHue >= 1) lightHue -= 1;
+        light.color = Color.HSVToRGB(lightHue, 1, 1);
     }
 }
