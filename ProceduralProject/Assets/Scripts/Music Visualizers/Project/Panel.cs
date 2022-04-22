@@ -8,21 +8,32 @@ public class Panel : MonoBehaviour
     public float hue = 0;
     public Color color = Color.black;
     private MeshRenderer mesh;
+    public bool white = false;
+    private bool mouseOver = false;
+    private
     // Start is called before the first frame update
-    void Start()
-    {
-        mesh = GetComponent<MeshRenderer>();
-    }
+    void Start() => mesh = GetComponent<MeshRenderer>();
 
     // Update is called once per frame
     void Update()
     {
-        mesh.material.SetColor("_Color", color);
-        if (brightness > 0)
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (mouseOver) white = true;
+            else white = false;
+        }
+        if(white) mesh.material.SetColor("_Color", Color.white);
+        else mesh.material.SetColor("_Color", color);
+        if(white) mesh.material.SetFloat("_Emission", 1);
+        else if (brightness > 0)
         {
             mesh.material.SetFloat("_Emission", brightness);
             brightness -= Time.deltaTime;
             if (brightness < 0) brightness = 0;
         }
     }
+
+    private void OnMouseEnter() => mouseOver = true;
+
+    private void OnMouseExit() => mouseOver = false;
 }
