@@ -11,7 +11,7 @@ public class DanceFloor : MonoBehaviour
     private Material lit;
     private AudioSource player;
     private int numBands = 512;
-    private Light light;
+    private Light[] lights;
     private float hue = 0;
     private LineRenderer line;
     [SerializeField]
@@ -22,7 +22,7 @@ public class DanceFloor : MonoBehaviour
     {
         player = GetComponent<AudioSource>();
         panels = GetComponentsInChildren<Panel>();
-        light = GetComponentInChildren<Light>();
+        lights = GetComponentsInChildren<Light>();
     }
 
     // Update is called once per frame
@@ -62,9 +62,10 @@ public class DanceFloor : MonoBehaviour
                 else dancers[i].material.SetFloat("_Flip", 0);
             }
         }
-        light.spotAngle = avgAmp * 100;
-        float lightHue = hue + 0.5f;
-        if (lightHue >= 1) lightHue -= 1;
-        light.color = Color.HSVToRGB(lightHue, 1, 1);
+        foreach (Light light in lights)
+        {
+            light.spotAngle = avgAmp * 400;
+            light.color = Color.HSVToRGB(hue, 1, 1);
+        }
     }
 }
