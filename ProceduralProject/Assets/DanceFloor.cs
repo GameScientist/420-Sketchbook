@@ -16,19 +16,21 @@ public class DanceFloor : MonoBehaviour
     private LineRenderer line;
     [SerializeField]
     private MeshRenderer[] dancers;
-    private float flipTimer = 0;
+    private float[] flipTimers;
+    private PostProcessing2 processer;
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<AudioSource>();
         panels = GetComponentsInChildren<Panel>();
         lights = GetComponentsInChildren<Light>();
+        flipTimers = new float[dancers.Length];
+        processer = GetComponent<PostProcessing2>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        flipTimer -= Time.deltaTime;
         float[] bands = new float[numBands];
         player.GetSpectrumData(bands, 0, FFTWindow.BlackmanHarris);
 
@@ -38,7 +40,8 @@ public class DanceFloor : MonoBehaviour
             avgAmp += bands[i];
         }
         avgAmp /= numBands;
-        avgAmp *= 100;
+        avgAmp *= 200;
+        processer.UpdateBloom(avgAmp*2);
         hue += avgAmp * Time.deltaTime;
         if (hue >= 1) hue -= 1;
 
@@ -53,11 +56,12 @@ public class DanceFloor : MonoBehaviour
             panels[i].color = Color.HSVToRGB(hue, 1, 1);
         }
         player.GetOutputData(dancerData, 0);
-        for(int i = 0; i<dancers.Length; i++)
+        for (int i = 0; i < dancers.Length; i++)
         {
-            if (panelData[i] > 0.3f && flipTimer <= 0)
+            flipTimers[i] -= Time.deltaTime;
+            if (panelData[i] > 0.3f && flipTimers[i] <= 0)
             {
-                flipTimer = 0.25f;
+                flipTimers[i] = 0.25f;
                 if (dancers[i].material.GetFloat("_Flip") == 0) dancers[i].material.SetFloat("_Flip", 1);
                 else dancers[i].material.SetFloat("_Flip", 0);
             }
