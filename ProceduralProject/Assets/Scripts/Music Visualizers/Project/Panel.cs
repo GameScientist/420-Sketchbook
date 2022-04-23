@@ -10,7 +10,8 @@ public class Panel : MonoBehaviour
     private MeshRenderer mesh;
     public bool white = false;
     private bool mouseOver = false;
-    private
+    public int moveCost;
+    public bool wall;
     // Start is called before the first frame update
     void Start() => mesh = GetComponent<MeshRenderer>();
 
@@ -19,7 +20,11 @@ public class Panel : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (mouseOver) white = true;
+            if (mouseOver)
+            {
+                white = true;
+                foreach (Dancer dancer in LightShow.singleton.dancers) dancer.destination = transform.position;
+            }
             else white = false;
         }
         if(white) mesh.material.SetColor("_Color", Color.white);

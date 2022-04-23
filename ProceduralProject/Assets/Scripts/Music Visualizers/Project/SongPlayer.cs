@@ -14,7 +14,7 @@ public class SongPlayer : MonoBehaviour
     void Start()
     {
         player = GetComponent<AudioSource>();
-        PlayTrack(0);
+        PlayTrackRandom();
     }
 
     public void PlayTrack(int n)

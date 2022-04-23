@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DanceFloor : MonoBehaviour
+public class LightShow : MonoBehaviour
 {
     Panel[] panels = new Panel[128];
     [SerializeField]
@@ -14,16 +14,34 @@ public class DanceFloor : MonoBehaviour
     private Light[] lights;
     private float hue = 0;
     private LineRenderer line;
-    [SerializeField]
-    private MeshRenderer[] dancers;
+    public Dancer[] dancers;
     private float[] flipTimers;
     private PostProcessing2 processer;
+    [SerializeField]
+    private GameObject panelGroup;
+    [SerializeField]
+    private GameObject lightGroup;
+    public static LightShow singleton { get; private set; }
+
+    private void Awake()
+    {
+        if (singleton != null) // we already have a singleton...
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        singleton = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+
         player = GetComponent<AudioSource>();
-        panels = GetComponentsInChildren<Panel>();
-        lights = GetComponentsInChildren<Light>();
+        panels = panelGroup.GetComponentsInChildren<Panel>();
+        lights = lightGroup.GetComponentsInChildren<Light>();
         flipTimers = new float[dancers.Length];
         processer = GetComponent<PostProcessing2>();
     }
@@ -62,8 +80,8 @@ public class DanceFloor : MonoBehaviour
             if (panelData[i] > 0.3f && flipTimers[i] <= 0)
             {
                 flipTimers[i] = 0.25f;
-                if (dancers[i].material.GetFloat("_Flip") == 0) dancers[i].material.SetFloat("_Flip", 1);
-                else dancers[i].material.SetFloat("_Flip", 0);
+                if (dancers[i].GetComponent<MeshRenderer>().material.GetFloat("_Flip") == 0) dancers[i].GetComponent<MeshRenderer>().material.SetFloat("_Flip", 1);
+                else dancers[i].GetComponent<MeshRenderer>().material.SetFloat("_Flip", 0);
             }
         }
         foreach (Light light in lights)
