@@ -234,12 +234,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &23484474
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,12 +351,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &35649599
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,12 +468,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &40712394
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,12 +585,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &50800323
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,12 +702,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &84547496
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,12 +853,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &111065615
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,12 +970,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &160087937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,12 +1087,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &195128841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,12 +1204,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &202492270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,12 +1321,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &210439305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,12 +1438,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &223791324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,12 +1555,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &228801666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,12 +1672,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &233719691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,12 +1789,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &240763531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,12 +1906,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &241950907
 GameObject:
   m_ObjectHideFlags: 0
@@ -2023,12 +2023,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &287703091
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,12 +2140,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &319921850
 GameObject:
   m_ObjectHideFlags: 0
@@ -2257,12 +2257,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &341497462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2374,12 +2374,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &343462047
 GameObject:
   m_ObjectHideFlags: 0
@@ -2491,12 +2491,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &352192856
 GameObject:
   m_ObjectHideFlags: 0
@@ -2608,12 +2608,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &369239905
 GameObject:
   m_ObjectHideFlags: 0
@@ -2725,12 +2725,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &383215980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2842,12 +2842,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &384745587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2959,12 +2959,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &390120456
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,12 +3076,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &438722427
 GameObject:
   m_ObjectHideFlags: 0
@@ -3193,12 +3193,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &463967328
 GameObject:
   m_ObjectHideFlags: 0
@@ -3310,12 +3310,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &476224230
 GameObject:
   m_ObjectHideFlags: 0
@@ -3427,12 +3427,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &484693085
 GameObject:
   m_ObjectHideFlags: 0
@@ -3544,12 +3544,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &489592657
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,12 +3661,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &491132573
 GameObject:
   m_ObjectHideFlags: 0
@@ -3778,12 +3778,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &525403696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4024,12 +4024,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &560805737
 GameObject:
   m_ObjectHideFlags: 0
@@ -4141,12 +4141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &570527016
 GameObject:
   m_ObjectHideFlags: 0
@@ -4258,12 +4258,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &575041535
 GameObject:
   m_ObjectHideFlags: 0
@@ -4375,12 +4375,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &636242572
 GameObject:
   m_ObjectHideFlags: 0
@@ -4492,12 +4492,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &636633219
 GameObject:
   m_ObjectHideFlags: 0
@@ -4609,12 +4609,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &639049999
 GameObject:
   m_ObjectHideFlags: 0
@@ -4726,12 +4726,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &653220157
 GameObject:
   m_ObjectHideFlags: 0
@@ -4843,12 +4843,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &700848432
 GameObject:
   m_ObjectHideFlags: 0
@@ -4960,12 +4960,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &719600794
 GameObject:
   m_ObjectHideFlags: 0
@@ -5077,12 +5077,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &722422845
 GameObject:
   m_ObjectHideFlags: 0
@@ -5194,12 +5194,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &726349724
 GameObject:
   m_ObjectHideFlags: 0
@@ -5440,12 +5440,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &756665554
 GameObject:
   m_ObjectHideFlags: 0
@@ -5557,12 +5557,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &778768290
 GameObject:
   m_ObjectHideFlags: 0
@@ -5674,12 +5674,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &779729210
 GameObject:
   m_ObjectHideFlags: 0
@@ -5791,12 +5791,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &790425321
 GameObject:
   m_ObjectHideFlags: 0
@@ -5908,12 +5908,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &793040156
 GameObject:
   m_ObjectHideFlags: 0
@@ -6025,12 +6025,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &794892482
 GameObject:
   m_ObjectHideFlags: 0
@@ -6142,12 +6142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &845135524
 GameObject:
   m_ObjectHideFlags: 0
@@ -6259,12 +6259,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &861068776
 GameObject:
   m_ObjectHideFlags: 0
@@ -6376,12 +6376,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &862491316
 GameObject:
   m_ObjectHideFlags: 0
@@ -6493,12 +6493,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &873449177
 GameObject:
   m_ObjectHideFlags: 0
@@ -6708,12 +6708,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &887159258
 GameObject:
   m_ObjectHideFlags: 0
@@ -6825,12 +6825,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &892164708
 GameObject:
   m_ObjectHideFlags: 0
@@ -6942,12 +6942,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &893595997
 GameObject:
   m_ObjectHideFlags: 0
@@ -7059,12 +7059,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &903067945
 GameObject:
   m_ObjectHideFlags: 0
@@ -7305,12 +7305,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &927813089
 GameObject:
   m_ObjectHideFlags: 0
@@ -7422,12 +7422,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &941478548
 GameObject:
   m_ObjectHideFlags: 0
@@ -7539,12 +7539,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &949764609
 GameObject:
   m_ObjectHideFlags: 0
@@ -7656,12 +7656,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &998420417
 GameObject:
   m_ObjectHideFlags: 0
@@ -7773,12 +7773,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &999673700
 GameObject:
   m_ObjectHideFlags: 0
@@ -7890,12 +7890,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1014296232
 GameObject:
   m_ObjectHideFlags: 0
@@ -8007,12 +8007,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1024031257
 GameObject:
   m_ObjectHideFlags: 0
@@ -8124,12 +8124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1029216919
 GameObject:
   m_ObjectHideFlags: 0
@@ -8241,12 +8241,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1065742636
 GameObject:
   m_ObjectHideFlags: 0
@@ -8358,12 +8358,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1072182100
 GameObject:
   m_ObjectHideFlags: 0
@@ -8475,12 +8475,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1082265345
 GameObject:
   m_ObjectHideFlags: 0
@@ -8815,12 +8815,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1132793822
 GameObject:
   m_ObjectHideFlags: 0
@@ -9030,12 +9030,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &1134142088
 GameObject:
   m_ObjectHideFlags: 0
@@ -9147,12 +9147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1157217122
 GameObject:
   m_ObjectHideFlags: 0
@@ -9264,12 +9264,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1157715859
 GameObject:
   m_ObjectHideFlags: 0
@@ -9381,12 +9381,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1158789475
 GameObject:
   m_ObjectHideFlags: 0
@@ -9498,12 +9498,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1170179209
 GameObject:
   m_ObjectHideFlags: 0
@@ -9615,12 +9615,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1202678143
 GameObject:
   m_ObjectHideFlags: 0
@@ -9732,12 +9732,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1204326107
 GameObject:
   m_ObjectHideFlags: 0
@@ -9849,12 +9849,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1210389728
 GameObject:
   m_ObjectHideFlags: 0
@@ -10154,12 +10154,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1247513672
 GameObject:
   m_ObjectHideFlags: 0
@@ -10271,12 +10271,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1250828953
 GameObject:
   m_ObjectHideFlags: 0
@@ -10388,12 +10388,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1252777413
 GameObject:
   m_ObjectHideFlags: 0
@@ -10603,12 +10603,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1344068859
 GameObject:
   m_ObjectHideFlags: 0
@@ -10720,12 +10720,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &1353787038
 GameObject:
   m_ObjectHideFlags: 0
@@ -10837,12 +10837,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1356138204
 GameObject:
   m_ObjectHideFlags: 0
@@ -10954,12 +10954,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1362173629
 GameObject:
   m_ObjectHideFlags: 0
@@ -11071,12 +11071,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1374722795
 GameObject:
   m_ObjectHideFlags: 0
@@ -11188,12 +11188,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1387854906
 GameObject:
   m_ObjectHideFlags: 0
@@ -11305,12 +11305,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1405828766
 GameObject:
   m_ObjectHideFlags: 0
@@ -11422,12 +11422,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1406453274
 GameObject:
   m_ObjectHideFlags: 0
@@ -11636,12 +11636,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1420423515
 GameObject:
   m_ObjectHideFlags: 0
@@ -11753,12 +11753,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1465169822
 GameObject:
   m_ObjectHideFlags: 0
@@ -12096,12 +12096,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1475731511
 GameObject:
   m_ObjectHideFlags: 0
@@ -12213,12 +12213,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1495054604
 GameObject:
   m_ObjectHideFlags: 0
@@ -12330,12 +12330,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1495233078
 GameObject:
   m_ObjectHideFlags: 0
@@ -12447,12 +12447,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &1499058966
 GameObject:
   m_ObjectHideFlags: 0
@@ -12662,12 +12662,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1549428972
 GameObject:
   m_ObjectHideFlags: 0
@@ -12779,12 +12779,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &1554933739
 GameObject:
   m_ObjectHideFlags: 0
@@ -12997,8 +12997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3cd60c8c3b0d1c468479bccbdfa9771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlit: {fileID: 2100000, guid: f9622d7dfd84ccd488912f469ae3f39a, type: 2}
-  lit: {fileID: 2100000, guid: 753fb9d5f92c133499ed61f936d445da, type: 2}
   dancers:
   - {fileID: 1465169827}
   - {fileID: 903067950}
@@ -13008,8 +13006,8 @@ MonoBehaviour:
   - {fileID: 1565856232}
   - {fileID: 1844977581}
   - {fileID: 726349729}
-  panelGroup: {fileID: 1775753529}
   lightGroup: {fileID: 84547496}
+  panelGroup: {fileID: 1775753529}
 --- !u!114 &1554933746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13023,7 +13021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: b94eaefffe3e6d54b82198604b078baa, type: 3}
-  noiseTexture: {fileID: 2800000, guid: 0c6f700979693bf42bf1c5d408717f8e, type: 3}
+  vignette: {fileID: 2800000, guid: 0c6f700979693bf42bf1c5d408717f8e, type: 3}
 --- !u!1 &1565856227
 GameObject:
   m_ObjectHideFlags: 0
@@ -13264,12 +13262,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1603425436
 GameObject:
   m_ObjectHideFlags: 0
@@ -13381,12 +13379,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1641975003
 GameObject:
   m_ObjectHideFlags: 0
@@ -13498,12 +13496,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1646075571
 GameObject:
   m_ObjectHideFlags: 0
@@ -13615,12 +13613,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1662171322
 GameObject:
   m_ObjectHideFlags: 0
@@ -13732,12 +13730,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &1705796968
 GameObject:
   m_ObjectHideFlags: 0
@@ -13849,12 +13847,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1713582542
 GameObject:
   m_ObjectHideFlags: 0
@@ -13966,12 +13964,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1718664360
 GameObject:
   m_ObjectHideFlags: 0
@@ -14083,12 +14081,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1747549206
 GameObject:
   m_ObjectHideFlags: 0
@@ -14200,12 +14198,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1770796538
 GameObject:
   m_ObjectHideFlags: 0
@@ -14528,12 +14526,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1794604237
 GameObject:
   m_ObjectHideFlags: 0
@@ -14645,12 +14643,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &1813301851
 GameObject:
   m_ObjectHideFlags: 0
@@ -14762,12 +14760,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1819453352
 GameObject:
   m_ObjectHideFlags: 0
@@ -14879,12 +14877,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &1831843450
 GameObject:
   m_ObjectHideFlags: 0
@@ -14996,12 +14994,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &1842623889
 GameObject:
   m_ObjectHideFlags: 0
@@ -15371,12 +15369,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1850512644
 GameObject:
   m_ObjectHideFlags: 0
@@ -15488,12 +15486,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1851239096
 GameObject:
   m_ObjectHideFlags: 0
@@ -15605,12 +15603,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1890795417
 GameObject:
   m_ObjectHideFlags: 0
@@ -15820,12 +15818,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1924969811
 GameObject:
   m_ObjectHideFlags: 0
@@ -15937,12 +15935,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1936182784
 GameObject:
   m_ObjectHideFlags: 0
@@ -16054,12 +16052,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &1941453919
 GameObject:
   m_ObjectHideFlags: 0
@@ -16171,12 +16169,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &1973457857
 GameObject:
   m_ObjectHideFlags: 0
@@ -16288,12 +16286,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1985151009
 GameObject:
   m_ObjectHideFlags: 0
@@ -16405,12 +16403,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &1987299251
 GameObject:
   m_ObjectHideFlags: 0
@@ -16620,12 +16618,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &2015163312
 GameObject:
   m_ObjectHideFlags: 0
@@ -16737,12 +16735,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &2015478152
 GameObject:
   m_ObjectHideFlags: 0
@@ -16854,12 +16852,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &2028682328
 GameObject:
   m_ObjectHideFlags: 0
@@ -16971,12 +16969,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &2059269371
 GameObject:
   m_ObjectHideFlags: 0
@@ -17088,12 +17086,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &2069552928
 GameObject:
   m_ObjectHideFlags: 0
@@ -17205,12 +17203,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &2106767879
 GameObject:
   m_ObjectHideFlags: 0
@@ -17322,12 +17320,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &2128985045
 GameObject:
   m_ObjectHideFlags: 0
@@ -17533,12 +17531,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 1
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 1
 --- !u!1 &2135063262
 GameObject:
   m_ObjectHideFlags: 0
@@ -17747,12 +17745,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0
 --- !u!1 &2141383421
 GameObject:
   m_ObjectHideFlags: 0
@@ -17864,9 +17862,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d4e8e04e88ddd4db84bb8a57f21653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: 0
+  white: 0
   brightness: 0
   hue: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  white: 0
   moveCost: 0
-  wall: 0

@@ -84,11 +84,11 @@ public class LightShow : MonoBehaviour
 
         processer.UpdateBloom(avgAmp * 200);
 
-        hue += avgAmp * Time.deltaTime * 200;
+        hue += avgAmp * Time.deltaTime * 400;
         if (hue >= 1) hue -= 1;
         foreach (Light light in lights)
         {
-            light.spotAngle = avgAmp / 30000;
+            light.spotAngle = avgAmp * 30000;
             light.color = Color.HSVToRGB(hue, 1, 1);
         }
     }
