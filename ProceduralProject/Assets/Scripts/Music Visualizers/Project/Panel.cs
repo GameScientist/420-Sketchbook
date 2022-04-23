@@ -1,17 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Lights up and changes colors to the beat of the music.
+/// </summary>
 public class Panel : MonoBehaviour
 {
-    public float brightness = 0;
-    public float hue = 0;
-    public Color color = Color.black;
-    private MeshRenderer mesh;
-    public bool white = false;
+    /// <summary>
+    /// When the user has their mouse over a panel.
+    /// </summary>
     private bool mouseOver = false;
+    /// <summary>
+    /// The mesh of the panel.
+    /// </summary>
+    private MeshRenderer mesh;
+    public bool wall, white;
+    /// <summary>
+    /// Controls the property of the shader.
+    /// </summary>
+    public float brightness = 0, hue = 0;
+    /// <summary>
+    /// The current color of this panel.
+    /// </summary>
+    public Color color = Color.black;
+    /// <summary>
+    /// How undesireable it is for a dancer to move across this panel.
+    /// </summary>
     public int moveCost;
-    public bool wall;
+
     // Start is called before the first frame update
     void Start() => mesh = GetComponent<MeshRenderer>();
 

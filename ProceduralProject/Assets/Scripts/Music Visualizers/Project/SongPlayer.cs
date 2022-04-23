@@ -6,9 +6,18 @@ using UnityEditor;
 [RequireComponent(typeof(AudioSource))]
 public class SongPlayer : MonoBehaviour
 {
-    public AudioClip[] playlist;
-    private AudioSource player;
+    /// <summary>
+    /// The current track being played.
+    /// </summary>
     private int currentTrack = -1;
+    /// <summary>
+    /// The source of the music being played.
+    /// </summary>
+    private AudioSource player;
+    /// <summary>
+    /// The list of every song that can be played using this script.
+    /// </summary>
+    public AudioClip[] playlist;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +26,10 @@ public class SongPlayer : MonoBehaviour
         PlayTrackRandom();
     }
 
+    /// <summary>
+    /// Plays the selected track.
+    /// </summary>
+    /// <param name="n">The index of the track being selected.</param>
     public void PlayTrack(int n)
     {
         if (n < 0 || n >= playlist.Length) return;
@@ -26,11 +39,13 @@ public class SongPlayer : MonoBehaviour
 
     public void PlayTrackRandom() => PlayTrack(Random.Range(0, playlist.Length));
 
+    /// <summary>
+    /// Plays the track that comes after the current track.
+    /// </summary>
     public void PlayTrackNext()
     {
         int track = currentTrack + 1;
         if (track >= playlist.Length) track = 0;
-
         PlayTrack(track);
     }
 
